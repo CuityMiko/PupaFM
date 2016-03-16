@@ -1,0 +1,25 @@
+{
+  "name": "douban.fm",
+  "version": "1.0.0",
+  "description": "豆瓣fm的桌面版",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@xwartz.github.com:xwartz/douban.fm.git"
+  },
+  "keywords": [
+    "douabn",
+    "fm",
+    "js",
+    "electron",
+    "desktop"
+  ],
+  "author": "xwartz",
+  "license": "MIT",
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.2"
+  }
+}
