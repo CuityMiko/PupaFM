@@ -9,9 +9,7 @@ new WebpackDevServer(webpack(config), {
   hot: true,
   noInfo: false,
   historyApiFallback: true
-}).listen(3000, '127.0.0.1', function (err, result) {
-  if (err) {
-    console.log(err)
-  }
+}).listen(3000, '127.0.0.1', (err, result) => {
+  err && console.log(err)
   console.log('Listening at localhost:3000')
 })

@@ -20,7 +20,9 @@ app.on('ready', ()=> {
 
   mainWindow = new BrowserWindow(win)
 
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  mainWindow.loadURL('http://douban.fm')
+
+  // mainWindow.loadURL(`file://${__dirname}/index.html`)
 
   mainWindow.webContents.openDevTools()
 
