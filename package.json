@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "dbfm-app-sdk": "0.0.9",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
   }
 }
