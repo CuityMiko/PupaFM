@@ -1,16 +1,10 @@
 'use strict'
 
-const AppSDK = require('dbfm-app-sdk')
+import React from 'react'
+import ReactDom from 'react-dom'
+import Player from './components/player'
 
-const sdk = new AppSDK()
-
-sdk.songs({
-  channel_id: '123'
-}, (err, songs) => {
-  if (err) {
-    console.log(err)
-  }
-  console.log(songs)
-})
-
-console.log('hello s')
+ReactDom.render(
+  <Player />,
+  document.getElementById('app')
+)
