@@ -23,7 +23,7 @@ module.exports = {
       loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=react']
     }, {
       test: /\.scss$/,
-      include: [path.resolve(__dirname, 'app/styles')],
+      include: [path.resolve(__dirname, 'app')],
       loader: 'style!css!sass'
     }, {
       test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
