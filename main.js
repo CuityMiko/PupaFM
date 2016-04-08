@@ -2,17 +2,16 @@
 
 const electron = require('electron')
 
-const app = electron.app,
-  BrowserWindow = electron.BrowserWindow
+const app = electron.app
+const BrowserWindow = electron.BrowserWindow
 
 let mainWindow = null
 
-app.on('window-all-closed', ()=> {
+app.on('window-all-closed', () => {
   app.quit()
 })
 
-app.on('ready', ()=> {
-  
+app.on('ready', () => {
   const win = {
     width: 800,
     height: 600
@@ -20,13 +19,13 @@ app.on('ready', ()=> {
 
   mainWindow = new BrowserWindow(win)
 
-  mainWindow.loadURL('http://douban.fm')
+  // mainWindow.loadURL('http://douban.fm')
 
-  // mainWindow.loadURL(`file://${__dirname}/index.html`)
+  mainWindow.loadURL(`file://${__dirname}/index.html`)
 
   mainWindow.webContents.openDevTools()
 
-  mainWindow.on('closed', ()=> {
+  mainWindow.on('closed', () => {
     mainWindow = null
   })
 })

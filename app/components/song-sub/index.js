@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
 class SongSubTitle extends Component {
-  render() {
+  render () {
     return (
       <div className='subtitle'>
-        <a href={this.this.props.songUrl}>{this.props.songSubTitle}</a>
+        <a href={this.props.songUrl}>{this.props.songSubTitle}</a>
         <div className='fr'>
-          <span className="time"></span>
+          <span className='time'>{this.props.time}</span>
         </div>
       </div>
     )
