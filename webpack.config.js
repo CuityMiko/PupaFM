@@ -20,7 +20,7 @@ module.exports = {
       test: /\.js$/,
       include: [path.resolve(__dirname, 'app')],
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel?presets[]=react']
+      loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=react']
     }, {
       test: /\.scss$/,
       include: [path.resolve(__dirname, 'app/styles')],
@@ -37,13 +37,19 @@ module.exports = {
     }, {
       test: /\.json$/,
       loader: 'json'
-    }]
+    }],
+    noParse: /node_modules\/json-schema\/lib\/validate\.js/
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.json']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
-  ]
+  ],
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  }
 }
