@@ -1,0 +1,17 @@
+.fullplayer {
+  width: 680px;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 50px;
+
+  .playing-info {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 430px;
+    height: 120px;
+    margin-top: -13px;
+  }
+
+}

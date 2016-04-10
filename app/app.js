@@ -2,9 +2,9 @@
 
 import React from 'react'
 import ReactDom from 'react-dom'
-import Player from './components/player'
+import Song from './components/song'
 
 ReactDom.render(
-  <Player />,
+  <Song />,
   document.getElementById('app')
 )

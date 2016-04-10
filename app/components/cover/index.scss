@@ -1,0 +1,15 @@
+.playing-cover {
+  position: absolute;
+  width: 206px;
+  height: 206px;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+}
