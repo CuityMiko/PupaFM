@@ -16,6 +16,7 @@ class SongTitle extends Component {
           </a>
           <div className='fr'>
             <span className='time'>{this.props.length}</span>
+            <span className="iconfont icon-pause"></span>
           </div>
         </div>
       </div>

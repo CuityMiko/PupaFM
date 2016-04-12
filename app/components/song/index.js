@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import AppSDK from 'dbfm-app-sdk'
 
 import './index.scss'
+import '../../assets/font/iconfont.scss'
 
 import SongTitle from '../title'
-import Player from '../player'
+import Progress from '../progress'
+import Controls from '../controls'
 import Cover from '../cover'
 
 const sdk = new AppSDK()
@@ -37,8 +39,11 @@ class Song extends Component {
     return (
       <div className="fullplayer">
         <div className="playing-info">
+          <audio src={this.props.url} preload autoPlay />
           <SongTitle {...this.state.song} />
-          <Player {...this.state.song} />
+          <Progress {...this.state.song} />
+          <div className="below-progress"></div>
+          <Controls />
         </div>
         <Cover {...this.state.song} />
       </div>
