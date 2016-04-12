@@ -33,15 +33,52 @@ class Song extends Component {
 
   componentDidMount () {
     this.updateState()
+    this.listenUpdate()
+  }
+
+  pause () {
+    this.refs.play.pause()
+  }
+
+  play () {
+    this.refs.play.play()
+  }
+
+  handlePlay (pause) {
+    pause ? this.pause() : this.play()
+  }
+
+  listenUpdate () {
+    this.refs.play.addEventListener('timeupdate', () => {
+      let pt = this.refs.play.currentTime
+      let dt = this.refs.play.duration
+
+      this.setState({
+        time: {
+          percent: this.refs.play.currentTime / this.refs.play.duration * 100,
+          pmt: this.formatTime(pt),
+          dmt: this.formatTime(dt)
+        }
+      })
+    })
+  }
+
+  // 格式化时间
+  formatTime (n) {
+    var m = Math.floor(n / 60)
+    var s = Math.ceil(n % 60)
+    m = m < 10 ? '0' + m : m
+    s = s < 10 ? '0' + s : s
+    return m + ':' + s
   }
 
   render () {
     return (
       <div className="fullplayer">
         <div className="playing-info">
-          <audio src={this.props.url} preload autoPlay />
-          <SongTitle {...this.state.song} />
-          <Progress {...this.state.song} />
+          <audio ref='play' src={this.state.song.url} preload autoPlay />
+          <SongTitle {...this.state.song} {...this.state.time} onPlay={(pause) => { this.handlePlay(pause) }} />
+          <Progress {...this.state.song} {...this.state.time} />
           <div className="below-progress"></div>
           <Controls />
         </div>

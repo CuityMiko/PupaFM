@@ -3,6 +3,20 @@ import React, { Component } from 'react'
 import './index.scss'
 
 class SongTitle extends Component {
+
+  handleClick (event) {
+    let cn = event.target.className
+    let isPause = false
+
+    if (/icon-pause/.test(cn)) {
+      event.target.className = 'iconfont icon-play'
+      isPause = true
+    } else {
+      event.target.className = 'iconfont icon-pause'
+    }
+    this.props.onPlay(isPause)
+  }
+
   render () {
     return (
       <div className='titles'>
@@ -15,8 +29,8 @@ class SongTitle extends Component {
             {this.props.albumtitle}
           </a>
           <div className='fr'>
-            <span className='time'>{this.props.length}</span>
-            <span className="iconfont icon-pause"></span>
+            <span className='time'>{this.props.pmt}</span>
+            <span onClick={this.handleClick.bind(this)} className="iconfont icon-pause"></span>
           </div>
         </div>
       </div>
