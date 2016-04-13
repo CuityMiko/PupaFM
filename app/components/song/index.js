@@ -11,22 +11,30 @@ import Cover from '../cover'
 
 const sdk = new AppSDK()
 
+let channelId = 123
+
 class Song extends Component {
 
   constructor (props) {
     super(props)
+    this.songs = []
+    this.index = 0
     this.state = { song: {} }
   }
 
   updateState () {
     sdk.songs({
-      channel_id: '123'
+      channel_id: channelId
     }, (err, songs) => {
       if (err) return console.error(err)
 
       this.setState({
         song: songs[0]
       })
+
+      this.songs = songs
+      this.index = 0
+
       console.log(songs)
     })
   }
@@ -48,7 +56,30 @@ class Song extends Component {
     pause ? this.pause() : this.play()
   }
 
+  // next
+  skip () {
+    this.index += 1
+    this.setState({
+      song: this.songs[this.index]
+    })
+
+    this.updateSong()
+  }
+
+  updateSong () {
+    if (this.songs.length <= this.index + 1) {
+      sdk.songs({
+        channel_id: channelId,
+        sid: this.state.song.sid
+      }, (err, songs) => {
+        if (err) return console.error(err)
+        this.songs = this.songs.concat(songs)
+      })
+    }
+  }
+
   listenUpdate () {
+    // 监听时间更新
     this.refs.play.addEventListener('timeupdate', () => {
       let pt = this.refs.play.currentTime
       let dt = this.refs.play.duration
@@ -59,6 +90,11 @@ class Song extends Component {
           time: this.formatTime(pt)
         }
       })
+    })
+
+    // 监听播放结束
+    this.refs.play.addEventListener('ended', () => {
+      this.skip()
     })
   }
 
@@ -79,7 +115,7 @@ class Song extends Component {
           <SongTitle {...this.state.song} {...this.state.play} onPlay={(pause) => { this.handlePlay(pause) }} />
           <Progress {...this.state.song} {...this.state.play} />
           <div className="below-progress"></div>
-          <Controls />
+          <Controls onSkip={() => { this.skip() }} />
         </div>
         <Cover {...this.state.song} />
       </div>
