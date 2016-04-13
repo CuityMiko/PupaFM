@@ -55,7 +55,7 @@ class Song extends Component {
 
       this.setState({
         time: {
-          percent: this.refs.play.currentTime / this.refs.play.duration * 100,
+          percent: this.refs.play.currentTime / this.refs.play.duration * 100 + '100%',
           pmt: this.formatTime(pt),
           dmt: this.formatTime(dt)
         }
