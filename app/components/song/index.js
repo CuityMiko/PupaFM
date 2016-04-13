@@ -54,10 +54,9 @@ class Song extends Component {
       let dt = this.refs.play.duration
 
       this.setState({
-        time: {
-          percent: this.refs.play.currentTime / this.refs.play.duration * 100 + '100%',
-          pmt: this.formatTime(pt),
-          dmt: this.formatTime(dt)
+        play: {
+          percent: pt / dt * 100 + '%',
+          time: this.formatTime(pt)
         }
       })
     })
@@ -77,8 +76,8 @@ class Song extends Component {
       <div className="fullplayer">
         <div className="playing-info">
           <audio ref='play' src={this.state.song.url} preload autoPlay />
-          <SongTitle {...this.state.song} {...this.state.time} onPlay={(pause) => { this.handlePlay(pause) }} />
-          <Progress {...this.state.song} {...this.state.time} />
+          <SongTitle {...this.state.song} {...this.state.play} onPlay={(pause) => { this.handlePlay(pause) }} />
+          <Progress {...this.state.song} {...this.state.play} />
           <div className="below-progress"></div>
           <Controls />
         </div>

@@ -29,7 +29,7 @@ class SongTitle extends Component {
             {this.props.albumtitle}
           </a>
           <div className='fr'>
-            <span className='time'>{this.props.pmt}</span>
+            <span className='time'>{this.props.time}</span>
             <span onClick={this.handleClick.bind(this)} className="iconfont icon-pause"></span>
           </div>
         </div>
