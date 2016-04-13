@@ -18,16 +18,24 @@ class SongTitle extends Component {
   }
 
   render () {
+    let singerNodes = this.props.singers && this.props.singers.map((singer) => {
+      return (
+        <a key={singer.id}
+           href={`http://douban.fm/artist/${singer.id}`} target='_blank'>
+          {singer.name}
+        </a>
+      )
+    })
     return (
       <div className='titles'>
         <div className='title'>
-          <a href={this.props.url}>{this.props.title}</a>
+          <a href={`https://music.douban.com${this.props.album}`} target='_blank'>
+            {this.props.title}
+          </a>
         </div>
 
         <div className='subtitle'>
-          <a href={`https://music.douban.com/${this.props.album}`} target='_blank'>
-            {this.props.albumtitle}
-          </a>
+          {singerNodes}
           <div className='fr'>
             <span className='time'>{this.props.time}</span>
             <span onClick={this.handleClick.bind(this)} className="iconfont icon-pause"></span>
