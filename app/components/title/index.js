@@ -18,7 +18,7 @@ class SongTitle extends Component {
   }
 
   render () {
-    let singerNodes = this.props.singers && this.props.singers.map((singer) => {
+    let singerNodes = this.props.singers.map((singer) => {
       return (
         <a key={singer.id}
            href={`http://douban.fm/artist/${singer.id}`} target='_blank'>

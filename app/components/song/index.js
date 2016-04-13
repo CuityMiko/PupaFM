@@ -19,18 +19,31 @@ class Song extends Component {
     super(props)
     this.songs = []
     this.index = 0
-    this.state = { song: {} }
+    this.state = {
+      singers: [],
+      title: '',
+      album: '',
+      time: '',
+      percent: '0%',
+      url: '',
+      picture: '',
+      like: false,
+      sid: ''
+    }
   }
 
-  updateState () {
+  updateState (nextState) {
+    let newState = Object.assign({}, this.state, nextState)
+    this.setState(newState)
+  }
+
+  updateSong () {
     sdk.songs({
       channel_id: channelId
     }, (err, songs) => {
       if (err) return console.error(err)
 
-      this.setState({
-        song: songs[0]
-      })
+      this.updateState(songs[0])
 
       this.songs = songs
       this.index = 0
@@ -40,7 +53,7 @@ class Song extends Component {
   }
 
   componentDidMount () {
-    this.updateState()
+    this.updateSong()
     this.listenUpdate()
   }
 
@@ -59,20 +72,32 @@ class Song extends Component {
   // next
   skip () {
     this.index += 1
-    this.setState({
-      song: this.songs[this.index]
-    })
-
-    this.updateSong()
+    this.updateState(this.songs[this.index])
+    this.updateSongs()
   }
 
-  updateSong () {
+  star () {
+    let method = this.state.like ? 'unstar' : 'star'
+    this.operate(method, (songs) => {
+      this.updateState({
+        like: !this.state.like
+      })
+    })
+  }
+
+  operate (method, cb) {
+    sdk[method]({
+      channel_id: channelId,
+      sid: this.state.sid
+    }, (err, songs) => {
+      if (err) return console.error(err)
+      cb && cb(songs)
+    })
+  }
+
+  updateSongs () {
     if (this.songs.length <= this.index + 1) {
-      sdk.songs({
-        channel_id: channelId,
-        sid: this.state.song.sid
-      }, (err, songs) => {
-        if (err) return console.error(err)
+      this.operate('songs', (songs) => {
         this.songs = this.songs.concat(songs)
       })
     }
@@ -84,11 +109,9 @@ class Song extends Component {
       let pt = this.refs.play.currentTime
       let dt = this.refs.play.duration
 
-      this.setState({
-        play: {
-          percent: pt / dt * 100 + '%',
-          time: this.formatTime(pt)
-        }
+      this.updateState({
+        percent: pt / dt * 100 + '%',
+        time: this.formatTime(pt)
       })
     })
 
@@ -111,13 +134,23 @@ class Song extends Component {
     return (
       <div className="fullplayer">
         <div className="playing-info">
-          <audio ref='play' src={this.state.song.url} preload autoPlay />
-          <SongTitle {...this.state.song} {...this.state.play} onPlay={(pause) => { this.handlePlay(pause) }} />
-          <Progress {...this.state.song} {...this.state.play} />
+          <audio ref='play' src={this.state.url} preload autoPlay />
+
+          <SongTitle {...this.state}
+            onPlay={(pause) => { this.handlePlay(pause) }}
+          />
+
+          <Progress {...this.state} />
+
           <div className="below-progress"></div>
-          <Controls onSkip={() => { this.skip() }} />
+
+          <Controls {...this.state}
+            onSkip={() => { this.skip() }}
+            onStar={() => { this.star() }}
+          />
+
         </div>
-        <Cover {...this.state.song} />
+        <Cover {...this.state} />
       </div>
     )
   }
