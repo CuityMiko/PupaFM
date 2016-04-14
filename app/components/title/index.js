@@ -5,16 +5,7 @@ import './index.scss'
 class SongTitle extends Component {
 
   handleClick (event) {
-    let cn = event.target.className
-    let isPause = false
-
-    if (/icon-pause/.test(cn)) {
-      event.target.className = 'iconfont icon-play'
-      isPause = true
-    } else {
-      event.target.className = 'iconfont icon-pause'
-    }
-    this.props.onPlay(isPause)
+    this.props.onPlay()
   }
 
   render () {
@@ -38,7 +29,9 @@ class SongTitle extends Component {
           {singerNodes}
           <div className='fr'>
             <span className='time'>{this.props.time}</span>
-            <span onClick={this.handleClick.bind(this)} className="iconfont icon-pause"></span>
+            <span onClick={this.handleClick.bind(this)}
+              className={'iconfont ' + (this.props.pause ? 'icon-play' : 'icon-pause')}>
+            </span>
           </div>
         </div>
       </div>

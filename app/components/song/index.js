@@ -28,7 +28,8 @@ class Song extends Component {
       url: '',
       picture: '',
       like: false,
-      sid: ''
+      sid: '',
+      pause: false
     }
   }
 
@@ -59,20 +60,25 @@ class Song extends Component {
 
   pause () {
     this.refs.play.pause()
+    this.updateState({ pause: true })
   }
 
   play () {
     this.refs.play.play()
+    this.updateState({ pause: false })
   }
 
-  handlePlay (pause) {
-    pause ? this.pause() : this.play()
+  handlePlay () {
+    this.state.pause ? this.play() : this.pause()
   }
 
   // next
   skip () {
     this.index += 1
-    this.updateState(this.songs[this.index])
+    let song = this.songs[this.index]
+    let pause = { pause: false }
+    let newState = Object.assign({}, song, pause)
+    this.updateState(newState)
     this.updateSongs()
   }
 
@@ -99,6 +105,7 @@ class Song extends Component {
     if (this.songs.length <= this.index + 1) {
       this.operate('songs', (songs) => {
         this.songs = this.songs.concat(songs)
+        console.log(this.songs)
       })
     }
   }
