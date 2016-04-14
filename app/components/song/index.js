@@ -11,7 +11,11 @@ import Cover from '../cover'
 
 const sdk = new AppSDK()
 
-let channelId = 123
+let opt = {
+  channel_id: '100',
+  sid: '1885670',
+  pt: '0.5'
+}
 
 class Song extends Component {
 
@@ -39,9 +43,7 @@ class Song extends Component {
   }
 
   updateSong () {
-    sdk.songs({
-      channel_id: channelId
-    }, (err, songs) => {
+    sdk.songs(opt, (err, songs) => {
       if (err) return console.error(err)
 
       this.updateState(songs[0])
@@ -72,14 +74,22 @@ class Song extends Component {
     this.state.pause ? this.play() : this.pause()
   }
 
-  // next
-  skip () {
+  _skip () {
     this.index += 1
     let song = this.songs[this.index]
     let pause = { pause: false }
     let newState = Object.assign({}, song, pause)
     this.updateState(newState)
-    this.updateSongs()
+    console.log(song.sid)
+  }
+
+  // next
+  skip () {
+    if (this.songs.length <= this.index + 1) {
+      this.updateSongs(this._skip.bind(this))
+    } else {
+      this._skip()
+    }
   }
 
   star () {
@@ -93,7 +103,7 @@ class Song extends Component {
 
   operate (method, cb) {
     sdk[method]({
-      channel_id: channelId,
+      channel_id: opt.channel_id,
       sid: this.state.sid
     }, (err, songs) => {
       if (err) return console.error(err)
@@ -101,13 +111,12 @@ class Song extends Component {
     })
   }
 
-  updateSongs () {
-    if (this.songs.length <= this.index + 1) {
-      this.operate('songs', (songs) => {
-        this.songs = this.songs.concat(songs)
-        console.log(this.songs)
-      })
-    }
+  updateSongs (cb) {
+    this.operate('songs', (songs) => {
+      this.songs = this.songs.concat(songs)
+      cb && cb()
+      console.log(this.songs)
+    })
   }
 
   listenUpdate () {
