@@ -76,8 +76,9 @@ class Song extends Component {
     this.state.pause ? this.play() : this.pause()
   }
 
-  _skip () {
-    this.index += 1
+  // play the nth form current song
+  skip (n) {
+    this.index += n
     let song = this.songs[this.index]
     let pause = { pause: false }
     let newState = Object.assign({}, song, pause)
@@ -85,21 +86,35 @@ class Song extends Component {
     console.log(song.sid)
   }
 
-  // next
-  skip () {
+  _next (n) {
     if (this.songs.length <= this.index + 1) {
-      this.updateSongs(this._skip.bind(this))
+      this.updateSongs(this.skip.bind(this, n))
     } else {
-      this._skip()
+      this.skip(n)
     }
   }
 
+  // next
+  next () {
+    this._next(1)
+  }
+
+  // like this song
   star () {
     let method = this.state.like ? 'unstar' : 'star'
     this.operate(method, (songs) => {
       this.updateState({
         like: !this.state.like
       })
+    })
+  }
+
+  // never play again
+  trash () {
+    this.operate('never_play_again', (songs) => {
+      this.songs.splice(this.index, 1)
+      this._next(0)
+      console.log(songs)
     })
   }
 
@@ -163,8 +178,9 @@ class Song extends Component {
           <div className="below-progress"></div>
 
           <Controls {...this.state}
-            onSkip={() => { this.skip() }}
+            onNext={() => { this.next() }}
             onStar={() => { this.star() }}
+            onTrash={() => { this.trash() }}
           />
 
         </div>

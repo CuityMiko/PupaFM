@@ -6,12 +6,16 @@ import './index.scss'
 
 class Controls extends Component {
 
-  handleSkip (event) {
-    this.props.onSkip()
+  handleNext (event) {
+    this.props.onNext()
   }
 
   handleStar (event) {
     this.props.onStar()
+  }
+
+  handleTrash () {
+    this.props.onTrash()
   }
 
   render () {
@@ -21,9 +25,9 @@ class Controls extends Component {
           <span className={ 'iconfont icon-heart ' + (this.props.like ? 'like' : '') }
             onClick={this.handleStar.bind(this)}
           ></span>
-          <span className="iconfont icon-trash"></span>
+          <span className="iconfont icon-trash" onClick={this.handleTrash.bind(this)}></span>
           <span className="iconfont icon-skip"
-            onClick={this.handleSkip.bind(this)}>
+            onClick={this.handleNext.bind(this)}>
           </span>
         </div>
       </div>
