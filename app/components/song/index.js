@@ -77,7 +77,7 @@ class Song extends Component {
   }
 
   // play the nth form current song
-  skip (n) {
+  _skip (n) {
     this.index += n
     let song = this.songs[this.index]
     let pause = { pause: false }
@@ -86,17 +86,17 @@ class Song extends Component {
     console.log(song.sid)
   }
 
-  _next (n) {
+  skip (n) {
     if (this.songs.length <= this.index + 1) {
-      this.updateSongs(this.skip.bind(this, n))
+      this.updateSongs(this._skip.bind(this, n))
     } else {
-      this.skip(n)
+      this._skip(n)
     }
   }
 
   // next
   next () {
-    this._next(1)
+    this.skip(1)
   }
 
   // like this song
@@ -113,7 +113,7 @@ class Song extends Component {
   trash () {
     this.operate('never_play_again', (songs) => {
       this.songs.splice(this.index, 1)
-      this._next(0)
+      this.skip(0)
       console.log(songs)
     })
   }
@@ -150,7 +150,7 @@ class Song extends Component {
 
     // 监听播放结束
     this.refs.play.addEventListener('ended', () => {
-      this.skip()
+      this.next()
     })
   }
 
