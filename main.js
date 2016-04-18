@@ -14,7 +14,9 @@ app.on('window-all-closed', () => {
 app.on('ready', () => {
   const win = {
     width: 800,
-    height: 600
+    height: 600,
+    // frame: true,
+    // resizeable: false
   }
 
   mainWindow = new BrowserWindow(win)
