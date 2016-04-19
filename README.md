@@ -10,3 +10,6 @@
 3. 语言: `es6` `scss`
 4. 框架: `reactjs` `redux` `react-router`
 5. 代码 lint 工具: `eslint`
+
+## License
+MIT
