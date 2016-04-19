@@ -20,7 +20,7 @@ module.exports = {
       test: /\.js$/,
       include: [path.resolve(__dirname, 'app')],
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=react']
+      loaders: ['react-hot', 'babel']
     }, {
       test: /\.scss$/,
       include: [path.resolve(__dirname, 'app')],
@@ -30,7 +30,7 @@ module.exports = {
       loader: 'url'
     }, {
       test: /\.(png|jpg)$/,
-      loader: 'url'
+      loader: 'url?limit=10240'
     }, {
       test: /\.json$/,
       loader: 'json'
