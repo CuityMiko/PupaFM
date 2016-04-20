@@ -4,14 +4,15 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
+  context: __dirname,
   entry: [
     'webpack-dev-server/client?http://127.0.0.1:3000',
     'webpack/hot/only-dev-server',
     './app/app.js'
   ],
   output: {
-    path: path.resolve(__dirname, '/dist/'),
-    publicPath: '/dist/',
+    path: path.resolve(__dirname, '/app/assets/'),
+    publicPath: '/app/assets/',
     filename: 'app.js'
   },
   devtool: 'source-map',
