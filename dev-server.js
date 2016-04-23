@@ -13,10 +13,7 @@ const PORT = 3000
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
-  inline: true,
-  hot: true,
   noInfo: false,
-  historyApiFallback: true,
   stats: {
     colors: true
   }

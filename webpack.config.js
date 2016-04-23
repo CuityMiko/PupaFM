@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   context: __dirname,
   entry: [
-    'webpack-hot-middleware/client?path=http://localhost:3000',
+    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
     './app/index.js'
   ],
   output: {
@@ -41,8 +41,15 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.json']
   },
   plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    // new webpack.DefinePlugin({
+    //   __DEV__: true,
+    //   'process.env': {
+    //     NODE_ENV: JSON.stringify('development')
+    //   }
+    // })
   ],
   target: 'electron'
   // node: {
