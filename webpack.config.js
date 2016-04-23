@@ -4,18 +4,17 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
+  devtool: 'cheap-module-eval-source-map',
   context: __dirname,
   entry: [
-    'webpack-dev-server/client?http://127.0.0.1:3000',
-    'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client?path=http://localhost:3000',
     './app/index.js'
   ],
   output: {
     path: path.resolve(__dirname, '/app/assets/'),
-    publicPath: '/app/assets/',
-    filename: 'app.js'
+    publicPath: 'http://localhost:3000/app/assets/',
+    filename: 'bundle.js'
   },
-  devtool: 'source-map',
   module: {
     loaders: [{
       test: /\.js$/,
@@ -43,7 +42,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
   ],
   target: 'electron'
   // node: {

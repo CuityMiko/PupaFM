@@ -11,21 +11,30 @@ app.on('window-all-closed', () => {
   app.quit()
 })
 
-app.on('ready', () => {
-  const win = {
-    width: 800,
-    height: 600,
-    // frame: true,
-    // resizeable: false
-  }
+let winProps = {
+  width: 800,
+  height: 600
+}
 
-  mainWindow = new BrowserWindow(win)
+if (process.env.NODE_ENV !== 'dev') {
+  winProps = {
+    width: 800,
+    height: 350,
+    frame: true,
+    resizeable: false
+  }
+}
+
+app.on('ready', () => {
+  mainWindow = new BrowserWindow(winProps)
 
   // mainWindow.loadURL('http://douban.fm')
 
   mainWindow.loadURL(`file://${__dirname}/index.html`)
 
-  mainWindow.webContents.openDevTools()
+  if (process.env.NODE_ENV === 'dev') {
+    mainWindow.webContents.openDevTools()
+  }
 
   mainWindow.on('closed', () => {
     mainWindow = null

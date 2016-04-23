@@ -38,7 +38,6 @@ class Song extends Component {
   }
 
   handlePause () {
-    console.log(this.state)
     this.props.pause ? this.playSong() : this.pauseSong()
     this.props.onPauseClick()
   }

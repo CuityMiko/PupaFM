@@ -75,7 +75,6 @@ function requestSongs (channel_id) {
 }
 
 function receiveSongs (songs) {
-  console.log(songs)
   return { type: types.RECEIVE_SONGS, songs }
 }
 
