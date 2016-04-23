@@ -8,7 +8,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://127.0.0.1:3000',
     'webpack/hot/only-dev-server',
-    './app/app.js'
+    './app/index.js'
   ],
   output: {
     path: path.resolve(__dirname, '/app/assets/'),

@@ -1,7 +1,6 @@
 'use strict'
 
-import React, { Component } from 'react'
-import AppSDK from 'dbfm-app-sdk'
+import React, { Component, PropTypes } from 'react'
 
 import './index.scss'
 import '../../assets/font/iconfont.scss'
@@ -11,129 +10,49 @@ import Progress from '../progress'
 import Controls from '../controls'
 import Cover from '../cover'
 
-const sdk = new AppSDK()
-
-let opt = {
-  channel_id: '100',
-  sid: '1885670',
-  pt: '0.5'
-}
-
 class Song extends Component {
 
   constructor (props) {
     super(props)
-    this.songs = []
-    this.index = 0
     this.state = {
-      singers: [],
-      title: '',
-      album: '',
-      time: '',
-      percent: '0%',
-      url: '',
-      picture: '',
-      like: false,
-      sid: '',
-      pause: false
+      time: '0.00',
+      percent: '0%'
     }
   }
 
-  updateState (nextState) {
-    let newState = Object.assign({}, this.state, nextState)
-    this.setState(newState)
-  }
-
-  updateSong () {
-    sdk.songs(opt, (err, songs) => {
-      if (err) return console.error(err)
-
-      this.updateState(songs[0])
-
-      this.songs = songs
-      this.index = 0
-
-      console.log(songs)
-    })
+  updateState (props) {
+    const nState = Object.assign({}, this.state, props)
+    this.setState(nState)
   }
 
   componentDidMount () {
-    this.updateSong()
     this.listenUpdate()
   }
 
-  pause () {
+  pauseSong () {
     this.refs.play.pause()
-    this.updateState({ pause: true })
   }
 
-  play () {
+  playSong () {
     this.refs.play.play()
-    this.updateState({ pause: false })
   }
 
-  handlePlay () {
-    this.state.pause ? this.play() : this.pause()
+  handlePause () {
+    console.log(this.state)
+    this.props.pause ? this.playSong() : this.pauseSong()
+    this.props.onPauseClick()
   }
 
-  // play the nth form current song
-  _skip (n) {
-    this.index += n
-    let song = this.songs[this.index]
-    let pause = { pause: false }
-    let newState = Object.assign({}, song, pause)
-    this.updateState(newState)
-    console.log(song.sid)
+  handleNext () {
+    this.props.onNextClick()
   }
 
-  skip (n) {
-    if (this.songs.length <= this.index + 1) {
-      this.updateSongs(this._skip.bind(this, n))
-    } else {
-      this._skip(n)
-    }
+  handleStar () {
+    this.props.onStarClick()
   }
 
-  // next
-  next () {
-    this.skip(1)
-  }
-
-  // like this song
-  star () {
-    let method = this.state.like ? 'unstar' : 'star'
-    this.operate(method, (songs) => {
-      this.updateState({
-        like: !this.state.like
-      })
-    })
-  }
-
-  // never play again
-  trash () {
-    this.operate('never_play_again', (songs) => {
-      this.songs.splice(this.index, 1)
-      this.skip(0)
-      console.log(songs)
-    })
-  }
-
-  operate (method, cb) {
-    sdk[method]({
-      channel_id: opt.channel_id,
-      sid: this.state.sid
-    }, (err, songs) => {
-      if (err) return console.error(err)
-      cb && cb(songs)
-    })
-  }
-
-  updateSongs (cb) {
-    this.operate('songs', (songs) => {
-      this.songs = this.songs.concat(songs)
-      cb && cb()
-      console.log(this.songs)
-    })
+  handleNever () {
+    this.props.onNeverClick()
   }
 
   listenUpdate () {
@@ -150,7 +69,7 @@ class Song extends Component {
 
     // 监听播放结束
     this.refs.play.addEventListener('ended', () => {
-      this.next()
+      this.handleNext()
     })
   }
 
@@ -164,30 +83,42 @@ class Song extends Component {
   }
 
   render () {
+    const { song, pause } = this.props
     return (
       <div className="fullplayer">
         <div className="playing-info">
-          <audio ref='play' src={this.state.url} preload autoPlay />
 
-          <SongTitle {...this.state}
-            onPlay={(pause) => { this.handlePlay(pause) }}
+          <audio ref='play' src={ song.url } preload autoPlay />
+
+          <SongTitle { ...song } time={ this.state.time } pause={ pause }
+            onPause={ () => { this.handlePause() } }
           />
 
-          <Progress {...this.state} />
+          <Progress percent={ this.state.percent } />
 
           <div className="below-progress"></div>
 
-          <Controls {...this.state}
-            onNext={() => { this.next() }}
-            onStar={() => { this.star() }}
-            onTrash={() => { this.trash() }}
+          <Controls { ...song }
+            onNext={ () => { this.handleNext() } }
+            onStar={ () => { this.handleStar() } }
+            onTrash={ () => { this.handleNever() } }
           />
 
         </div>
-        <Cover {...this.state} />
+
+        <Cover { ...song } />
+
       </div>
     )
   }
+}
+
+Song.propTypes = {
+  song: PropTypes.object.isRequired,
+  onNextClick: PropTypes.func.isRequired,
+  onStarClick: PropTypes.func.isRequired,
+  onPauseClick: PropTypes.func.isRequired,
+  onNeverClick: PropTypes.func.isRequired
 }
 
 export default Song

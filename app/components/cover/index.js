@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 import './index.scss'
 
@@ -11,12 +11,19 @@ const styleCover = {
 
 class Cover extends Component {
   render () {
+    const { picture, album } = this.props
+
     return (
-      <a className='playing-cover' href={`https://music.douban.com/${this.props.album}`} target='_blank'>
-        <img className='cover' style={styleCover} src={this.props.picture} />
+      <a className='playing-cover' href={`https://music.douban.com${album}`} target='_blank'>
+        <img className='cover' style={styleCover} src={picture} />
       </a>
     )
   }
+}
+
+Cover.propTypes = {
+  picture: PropTypes.string.isRequired,
+  album: PropTypes.string.isRequired
 }
 
 export default Cover
