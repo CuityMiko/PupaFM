@@ -1,4 +1,4 @@
-import { DO_PAUSE } from '../constants/actionType'
+import { DO_PAUSE } from '../actions/types'
 
 // 暂停播放
 const initialState = false

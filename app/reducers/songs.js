@@ -1,4 +1,4 @@
-import { DO_NEVER, DO_LIKE } from '../constants/actionType'
+import { DO_NEVER, DO_LIKE } from '../actions/types'
 
 // 歌曲
 const initialState = [

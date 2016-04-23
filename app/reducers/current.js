@@ -1,4 +1,4 @@
-import { DO_NEXT } from '../constants/actionType'
+import { DO_NEXT } from '../actions/types'
 
 // 当前播放的
 const initialState = 0
