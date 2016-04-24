@@ -6,8 +6,9 @@
   "main": "./src/main.dev.js",
   "scripts": {
     "lint": "eslint src test *.js",
-    "server-hot": "node -r babel-register dev-server.js",
-    "start-hot": "cross-env NODE_ENV=development electron -r babel-register ./src/main.dev",
+    "hot-server": "node -r babel-register dev-server.js",
+    "hot-start": "cross-env NODE_ENV=development electron -r babel-register ./src/main.dev",
+    "dev": "npm run hot-server && npm run hot-start",
     "build-renderer": "cross-env NODE_ENV=production node -r babel-register ./node_modules/.bin/webpack --config webpack.config.pro.js --progress --profile --colors",
     "build-main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/.bin/webpack --config webpack.config.electron.js --progress --profile --colors",
     "start": "cross-env NODE_ENV=production electron -r babel-register ./src/main.dev",
@@ -15,7 +16,9 @@
     "postinstall": "install-app-deps",
     "pack": "build --sign=stddup@gmail.com",
     "dist": "build --sign=stddup@gmail.com",
-    "package": "cross-env NODE_ENV=production node -r babel-register package.js",
+    "compile": "npm run build-renderer && npm run build-main",
+    "package": "npm run compile && npm run pack",
+    "builder": "npm run compile && npm run dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "build": {
@@ -26,12 +29,13 @@
       "contents": [
         {
           "x": 410,
-          "y": 220,
+          "y": 150,
           "type": "link",
           "path": "/Applications"
-        }, {
+        },
+        {
           "x": 130,
-          "y": 220,
+          "y": 150,
           "type": "file"
         }
       ]
@@ -44,6 +48,7 @@
   "keywords": [
     "douabn",
     "fm",
+    "douabn.fm",
     "js",
     "es6",
     "babel",
@@ -60,35 +65,32 @@
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.7.2",
-    "babel-eslint": "^6.0.3",
     "babel-loader": "^6.2.4",
-    "babel-polyfill": "^6.7.4",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.7.2",
+    "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
     "del": "^2.2.0",
     "electron-builder": "^3.9.0",
-    "electron-packager": "^5.2.1",
     "electron-prebuilt": "^0.37.2",
     "eslint": "^2.7.0",
     "eslint-config-standard": "^5.1.0",
     "eslint-plugin-promise": "^1.1.0",
-    "eslint-plugin-react": "^4.3.0",
+    "eslint-plugin-react": "^5.0.1",
     "eslint-plugin-standard": "^1.3.2",
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
     "fbjs-scripts": "^0.6.0",
+    "html-webpack-plugin": "^2.16.0",
     "json-loader": "^0.5.4",
-    "minimist": "^1.2.0",
     "node-sass": "^3.5.3",
     "react-hot-loader": "^1.3.0",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
-    "html-webpack-plugin": "^2.16.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   },
@@ -99,7 +101,7 @@
     "react-redux": "^4.4.5",
     "redux": "^3.5.0",
     "redux-logger": "^2.5.2",
-    "redux-thunk": "^1.0.3"
+    "redux-thunk": "^2.0.1"
   },
   "devEngines": {
     "node": ">=5.0",
