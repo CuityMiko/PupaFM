@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>douban.fm</title>
+  <script>
+    // (function() {
+    //   if (process.env.NODE_ENV !== 'development') {
+    //     const link = document.createElement('link');
+    //     link.rel = 'stylesheet';
+    //     link.href = './dist/style.css';
+    //     document.write(link.outerHTML);
+    //   }
+    // }())
+  </script>
 </head>
 <body>
   <div id="app"></div>
@@ -10,7 +20,7 @@
   <script>
     (function() {
       const script = document.createElement('script')
-      script.src = (process.env.NODE_ENV === 'dev') ? 'http://localhost:3000/app/assets/bundle.js' : './dist/bundle.js'
+      script.src = (process.env.NODE_ENV === 'development') ? 'http://localhost:3000/dist/bundle.js' : './dist/bundle.js'
       document.write(script.outerHTML)
     }())
   </script>

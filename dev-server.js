@@ -1,11 +1,11 @@
 'use strict'
 
-const webpack = require('webpack')
-const express = require('express')
-const webpackDevMiddleware = require('webpack-dev-middleware')
-const webpackHotMiddleware = require('webpack-hot-middleware')
+import express from 'express'
+import webpack from 'webpack'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
 
-const config = require('./webpack.config')
+import config from './webpack.config.dev'
 
 const app = express()
 const compiler = webpack(config)

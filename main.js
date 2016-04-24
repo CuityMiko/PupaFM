@@ -1,6 +1,6 @@
 'use strict'
 
-const electron = require('electron')
+import electron from 'electron'
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
@@ -12,11 +12,11 @@ app.on('window-all-closed', () => {
 })
 
 let winProps = {
-  width: 800,
-  height: 600
+  width: 1000,
+  height: 800
 }
 
-if (process.env.NODE_ENV !== 'dev') {
+if (process.env.NODE_ENV !== 'development') {
   winProps = {
     width: 800,
     height: 350,
@@ -32,7 +32,7 @@ app.on('ready', () => {
 
   mainWindow.loadURL(`file://${__dirname}/index.html`)
 
-  if (process.env.NODE_ENV === 'dev') {
+  if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools()
   }
 
