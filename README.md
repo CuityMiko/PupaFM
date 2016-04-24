@@ -14,14 +14,14 @@
 
 1. 构建跨平台桌面应用: [Electron](http://electron.atom.io/)
 2. 构建工具: [Webpack](http://webpack.github.io/docs/),
-[electron-builder](https://github.com/electron-userland/electron-builder),
-[Babel](https://babeljs.io)
-3. 语言: [es2015](https://babeljs.io/docs/learn-es2015/), [scss](http://sass-lang.com/)
+[Babel](https://babeljs.io), 
+[electron-builder](https://github.com/electron-userland/electron-builder)
+3. 语言: [ES2015](https://babeljs.io/docs/learn-es2015/), [Sass](http://sass-lang.com/)
 4. 框架: [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux),
 [React Router](https://github.com/reactjs/react-router),
-[React-Hot-Loader](https://github.com/gaearon/react-hot-loader),
-[redux-thunk](https://github.com/gaearon/redux-thunk)
-5. 代码 lint 工具: [eslint](http://eslint.org/)
+[React Hot Loader](https://github.com/gaearon/react-hot-loader),
+[Redux Thunk](https://github.com/gaearon/redux-thunk)
+5. 代码 lint 工具: [ESLint](http://eslint.org/)
 
 ## Release Page
 [Releases](https://github.com/xwartz/douban.fm/releases)
@@ -75,7 +75,7 @@ $ npm run builder
 ```
 
 ## Note
-When run `package` or `builder`, you should read [electron-builder docs](https://github.com/electron-userland/electron-builder#readme) and checkout [Code Signing](https://github.com/electron-userland/electron-builder#code-signing)
+Before run `package` or `builder`, you should read [electron-builder docs](https://github.com/electron-userland/electron-builder#readme) and checkout [Code Signing](https://github.com/electron-userland/electron-builder#code-signing)
 
 
 ## License
