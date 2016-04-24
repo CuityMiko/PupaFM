@@ -6,7 +6,7 @@ import { nextSong, pauseSong, postNever, postLike, fetchMoreSongs, fetchSongs } 
 
 import Song from '../components/song'
 
-const channel_id = '100'
+const channelId = '100'
 // const sid = '1885670'
 
 class App extends Component {
@@ -17,7 +17,7 @@ class App extends Component {
 
   componentDidMount () {
     const { dispatch } = this.props
-    dispatch(fetchSongs(channel_id))
+    dispatch(fetchSongs(channelId))
   }
 
   pause () {
@@ -29,7 +29,7 @@ class App extends Component {
   star () {
     const { dispatch, current, songs } = this.props
     const song = songs[current]
-    dispatch(postLike(song.like, channel_id, song.sid))
+    dispatch(postLike(song.like, channelId, song.sid))
   }
 
   _skip (method) {
@@ -37,7 +37,7 @@ class App extends Component {
     const song = songs[current]
 
     if (songs.length <= current + 2) {
-      dispatch(fetchMoreSongs(channel_id, song.sid, () => dispatch(method())))
+      dispatch(fetchMoreSongs(channelId, song.sid, () => dispatch(method())))
     } else {
       dispatch(method())
     }

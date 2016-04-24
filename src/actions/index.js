@@ -24,11 +24,11 @@ export function like () {
 function receiveNever () {
   return { type: types.RECEIVE_NEVER }
 }
-export function postNever (channel_id, sid) {
+export function postNever (channelId, sid) {
   return function (dispatch) {
     dispatch(never())
 
-    return operate('never_play_again', { channel_id, sid },
+    return operate('never_play_again', { channel_id: channelId, sid },
       () => receiveNever())
   }
 }
@@ -38,30 +38,30 @@ function receiveLike () {
   return { type: types.RECEIVE_LIKE }
 }
 
-export function postLike (isLike, channel_id, sid) {
+export function postLike (isLike, channelId, sid) {
   const method = isLike ? 'unstar' : 'star'
   return function (dispatch) {
     dispatch(like())
 
-    return operate(method, { channel_id, sid },
+    return operate(method, { channel_id: channelId, sid },
       () => receiveLike())
   }
 }
 
 // fetch more
-function requestMoreSongs (channel_id, sid) {
-  return { type: types.REQUEST_MORE, channel_id, sid }
+function requestMoreSongs (channelId, sid) {
+  return { type: types.REQUEST_MORE, channel_id: channelId, sid }
 }
 
 function receiveMoreSongs (songs) {
   return { type: types.RECEIVE_MORE, songs }
 }
 
-export function fetchMoreSongs (channel_id, sid, cb) {
+export function fetchMoreSongs (channelId, sid, cb) {
   return function (dispatch) {
-    dispatch(requestMoreSongs(channel_id, sid))
+    dispatch(requestMoreSongs(channelId, sid))
 
-    return operate('songs', { channel_id, sid },
+    return operate('songs', { channel_id: channelId, sid },
       (songs) => {
         dispatch(receiveMoreSongs(songs))
         cb && cb()
@@ -70,19 +70,19 @@ export function fetchMoreSongs (channel_id, sid, cb) {
 }
 
 // fetch songs
-function requestSongs (channel_id) {
-  return { type: types.REQUEST_SONGS, channel_id }
+function requestSongs (channelId) {
+  return { type: types.REQUEST_SONGS, channelId }
 }
 
 function receiveSongs (songs) {
   return { type: types.RECEIVE_SONGS, songs }
 }
 
-export function fetchSongs (channel_id) {
+export function fetchSongs (channelId) {
   return function (dispatch) {
-    dispatch(requestSongs(channel_id))
+    dispatch(requestSongs(channelId))
 
-    return operate('songs', { channel_id },
+    return operate('songs', { channel_id: channelId },
       (songs) => dispatch(receiveSongs(songs)))
   }
 }
