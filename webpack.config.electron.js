@@ -8,11 +8,11 @@ export default {
 
   devtool: 'source-map',
 
-  entry: './main.dev',
+  entry: './src/main.dev',
 
   output: {
     path: __dirname,
-    filename: './main.js'
+    filename: './app/main.js'
   },
 
   module: {

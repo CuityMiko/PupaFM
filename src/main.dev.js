@@ -29,9 +29,9 @@ app.on('ready', () => {
 
   mainWindow.loadURL(`file://${__dirname}/index.html`)
 
-  // if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools()
-  // }
+  }
 
   mainWindow.on('closed', () => {
     mainWindow = null

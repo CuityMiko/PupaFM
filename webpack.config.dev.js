@@ -1,6 +1,6 @@
 'use strict'
 
-import path from 'path'
+// import path from 'path'
 import webpack from 'webpack'
 import baseConfig from './webpack.config.base'
 
@@ -12,13 +12,13 @@ export default {
   devtool: 'cheap-module-eval-source-map',
 
   entry: [
-    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
-    './app/index'
+    'webpack-hot-middleware/client?path=http://localhost:3000/app/__webpack_hmr',
+    './src/index'
   ],
 
   output: {
     ...baseConfig.output,
-    publicPath: 'http://localhost:3000/dist/'
+    publicPath: 'http://localhost:3000/app/'
   },
 
   module: {
@@ -27,7 +27,7 @@ export default {
       ...baseConfig.module.loaders,
       {
         test: /\.js$/,
-        include: [path.resolve(__dirname, 'app')],
+        // include: [path.resolve(__dirname, 'src')],
         exclude: /node_modules/,
         loaders: ['react-hot', 'babel']
       }, {

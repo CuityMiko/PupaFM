@@ -1,5 +1,6 @@
-import path from 'path'
+// import path from 'path'
 import webpack from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 // import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import baseConfig from './webpack.config.base'
 
@@ -8,12 +9,12 @@ const config = {
 
   devtool: 'cheap-module-source-map',
 
-  entry: './app/index',
+  entry: './src/index',
 
   output: {
     ...baseConfig.output,
 
-    publicPath: './dist/'
+    publicPath: './app/'
   },
 
   module: {
@@ -23,7 +24,6 @@ const config = {
       ...baseConfig.module.loaders,
       {
         test: /\.js$/,
-        include: [path.resolve(__dirname, 'app')],
         exclude: /node_modules/,
         loaders: ['babel']
       }, {
@@ -55,6 +55,10 @@ const config = {
         warnings: false
       }
     }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/index.html'
+    })
     // new ExtractTextPlugin('style.css', { allChunks: true })
   ]
 }
