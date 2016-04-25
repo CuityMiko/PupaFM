@@ -1,6 +1,6 @@
 'use strict'
 
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import rootReducer from '../reducers'
@@ -8,18 +8,17 @@ import rootReducer from '../reducers'
 export default function configureStore (initialState) {
   const loggerMiddleware = createLogger()
 
-  const createStoreWithMiddleware = applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-  )(createStore)
+  const enhancer = compose(
+    applyMiddleware(thunkMiddleware, loggerMiddleware)
+  )
 
-  const store = createStoreWithMiddleware(rootReducer)
+  const store = createStore(rootReducer, initialState, enhancer)
 
-  // const store = createStore(
-  //   rootReducer,
-  //   initialState,
-  //   applyMiddleware(thunkMiddleware, createLogger)
-  // )
+  if (module.hot) {
+    module.hot.accept('../reducers', () =>
+      store.replaceReducer(require('../reducers'))
+    )
+  }
 
   // store.subscribe(() =>
   //   console.log(store.getState())

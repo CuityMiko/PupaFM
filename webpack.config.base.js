@@ -5,6 +5,11 @@ import path from 'path'
 export default {
   module: {
     loaders: [{
+      test: /\.jsx?$/,
+      // include: [path.resolve(__dirname, 'src')],
+      exclude: /node_modules/,
+      loaders: ['babel']
+    }, {
       test: /\.json$/,
       loader: 'json'
     }, {

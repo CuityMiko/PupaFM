@@ -15,16 +15,9 @@ export default {
     filename: './app/main.js'
   },
 
-  module: {
-    loaders: [
-      ...baseConfig.module.loaders,
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loaders: ['babel']
-      }
-    ]
-  },
+  // module: {
+  //   ...baseConfig.module
+  // },
 
   plugins: [
     new webpack.optimize.UglifyJsPlugin({

@@ -14,6 +14,7 @@ const PORT = 3000
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
   noInfo: false,
+  reload: true,
   stats: {
     colors: true
   }

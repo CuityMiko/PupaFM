@@ -26,11 +26,6 @@ export default {
     loaders: [
       ...baseConfig.module.loaders,
       {
-        test: /\.js$/,
-        // include: [path.resolve(__dirname, 'src')],
-        exclude: /node_modules/,
-        loaders: ['react-hot', 'babel']
-      }, {
         test: /\.scss$/,
         loader: 'style!css!sass'
       }

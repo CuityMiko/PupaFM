@@ -23,10 +23,6 @@ const config = {
     loaders: [
       ...baseConfig.module.loaders,
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loaders: ['babel']
-      }, {
         test: /\.scss$/,
         loader: 'style!css!sass'
       }
