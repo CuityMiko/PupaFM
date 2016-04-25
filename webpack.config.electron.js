@@ -41,6 +41,8 @@ export default {
     __filename: false
   },
 
+  target: 'electron'
+
   // externals: [
   //   ...baseConfig.externals,
   //   'source-map-support'
