@@ -5,10 +5,10 @@ import React, { Component, PropTypes } from 'react'
 import './index.scss'
 import '../../assets/font/iconfont.scss'
 
-import SongTitle from '../title'
-import Progress from '../progress'
-import Controls from '../controls'
-import Cover from '../cover'
+import SongTitle from './title'
+import Progress from './progress'
+import Controls from './controls'
+import Cover from './cover'
 
 class Song extends Component {
 

@@ -9,7 +9,7 @@ class Player extends Component {
   render () {
     const { url } = this.props
     return (
-      <audio src={url}
+      <audio src={ url }
       preload autoPlay />
     )
   }
