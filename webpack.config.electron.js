@@ -41,7 +41,7 @@ export default {
     __filename: false
   },
 
-  target: 'electron'
+  target: 'electron-main'
 
   // externals: [
   //   ...baseConfig.externals,
