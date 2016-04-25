@@ -2,8 +2,8 @@
   "name": "douban.fm",
   "productName": "douban.fm",
   "version": "1.0.0",
-  "description": "豆瓣fm的桌面版",
-  "main": "./src/main.dev.js",
+  "description": "豆瓣fm的桌面应用",
+  "main": "./main.js",
   "author": "xwartz <stddup@gmail.com>",
   "license": "MIT"
 }
