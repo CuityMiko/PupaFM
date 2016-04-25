@@ -1,0 +1,9 @@
+{
+  "name": "douban.fm",
+  "productName": "douban.fm",
+  "version": "1.0.0",
+  "description": "豆瓣fm的桌面版",
+  "main": "./src/main.dev.js",
+  "author": "xwartz <stddup@gmail.com>",
+  "license": "MIT"
+}
