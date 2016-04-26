@@ -9,6 +9,7 @@ import SongTitle from './title'
 import Progress from './progress'
 import Controls from './controls'
 import Cover from './cover'
+import Lyric from './lyric'
 
 class Song extends Component {
 
@@ -54,6 +55,10 @@ class Song extends Component {
     this.props.onNeverClick()
   }
 
+  handleShowLyric () {
+    this.props.onShowLyric()
+  }
+
   listenUpdate () {
     // 监听时间更新
     this.refs.player.addEventListener('timeupdate', () => {
@@ -82,7 +87,8 @@ class Song extends Component {
   }
 
   render () {
-    const { song, pause } = this.props
+    const { song, pause, isShowLyric } = this.props
+
     return (
       <div className="fullplayer">
         <div className="playing-info">
@@ -95,7 +101,11 @@ class Song extends Component {
 
           <Progress percent={ this.state.percent } />
 
-          <div className="below-progress"></div>
+          <div className="below-progress">
+            <span className="iconfont icon-lyric"
+              onClick={ () => { this.handleShowLyric() } }>
+            </span>
+          </div>
 
           <Controls { ...song }
             onNext={ () => { this.handleNext() } }
@@ -107,6 +117,10 @@ class Song extends Component {
 
         <Cover { ...song } />
 
+        <Lyric { ...song } isShowLyric={ isShowLyric }
+          closeLyric={ () => { this.handleShowLyric() } }
+        />
+
       </div>
     )
   }
@@ -117,7 +131,10 @@ Song.propTypes = {
   onNextClick: PropTypes.func.isRequired,
   onStarClick: PropTypes.func.isRequired,
   onPauseClick: PropTypes.func.isRequired,
-  onNeverClick: PropTypes.func.isRequired
+  onNeverClick: PropTypes.func.isRequired,
+  onShowLyric: PropTypes.func.isRequired,
+  isShowLyric: PropTypes.bool.isRequired,
+  pause: PropTypes.bool.isRequired
 }
 
 export default Song

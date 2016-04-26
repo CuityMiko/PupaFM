@@ -4,10 +4,12 @@
 
 import {
   DO_NEVER, DO_LIKE, DO_NEXT, DO_PAUSE,
-  REQUEST_SONGS, RECEIVE_SONGS, REQUEST_MORE, RECEIVE_MORE
+  REQUEST_SONGS, RECEIVE_SONGS, REQUEST_MORE, RECEIVE_MORE,
+  SHOW_LYRIC, REQUEST_LYRIC, RECEIVE_LYRIC
 } from '../actions/types'
 
 const initialState = {
+  isShowLyric: false,
   pause: false,
   current: 0,
   songs: [{
@@ -17,12 +19,13 @@ const initialState = {
     url: 'https://xwartz.github.com',
     picture: 'https://img3.doubanio.com/lpic/s7052285.jpg',
     like: false,
+    lyric: '',
     sid: ''
   }]
 }
 
 export default function rootReducer (state = initialState, action) {
-  const { songs, current, pause } = state
+  const { songs, current, pause, isShowLyric } = state
 
   switch (action.type) {
     case DO_NEVER:
@@ -48,8 +51,19 @@ export default function rootReducer (state = initialState, action) {
 
     case RECEIVE_MORE:
       return Object.assign({}, state, { songs: [...songs, ...action.songs] })
+
+    case SHOW_LYRIC:
+      return Object.assign({}, state, { isShowLyric: !isShowLyric })
+
+    case RECEIVE_LYRIC:
+      return Object.assign({}, state, {
+        songs: songs.map((song, index) =>
+          index === current ? Object.assign({}, song, { lyric: action.lyric }) : song)
+      })
+
     case REQUEST_SONGS:
     case REQUEST_MORE:
+    case REQUEST_LYRIC:
       return state
 
     default:

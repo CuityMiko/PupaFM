@@ -11,12 +11,11 @@ export function pauseSong () {
   return { type: types.DO_PAUSE }
 }
 
-//
-export function never () {
+function never () {
   return { type: types.DO_NEVER }
 }
 
-export function like () {
+function like () {
   return { type: types.DO_LIKE }
 }
 
@@ -24,6 +23,7 @@ export function like () {
 function receiveNever () {
   return { type: types.RECEIVE_NEVER }
 }
+
 export function postNever (channelId, sid) {
   return function (dispatch) {
     dispatch(never())
@@ -84,5 +84,30 @@ export function fetchSongs (channelId) {
 
     return operate('songs', { channel_id: channelId },
       (songs) => dispatch(receiveSongs(songs)))
+  }
+}
+
+// lyric
+export function showLyric () {
+  return { type: types.SHOW_LYRIC }
+}
+
+function requestLyric () {
+  return { type: types.REQUEST_LYRIC }
+}
+
+function receiveLyric (lyric) {
+  return { type: types.RECEIVE_LYRIC, lyric }
+}
+
+export function fetchLyric (sid, cb) {
+  return (dispatch) => {
+    dispatch(requestLyric())
+
+    return operate('lyric', { song_id: sid },
+      (lyric) => {
+        dispatch(receiveLyric(lyric))
+        cb && cb()
+      })
   }
 }

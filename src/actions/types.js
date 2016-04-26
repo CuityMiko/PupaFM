@@ -14,3 +14,8 @@ export const RECEIVE_SONGS = 'RECEIVE_SONGS'
 
 export const REQUEST_MORE = 'REQUEST_MORE'
 export const RECEIVE_MORE = 'RECEIVE_MORE'
+
+// lyric
+export const SHOW_LYRIC = 'SHOW_LYRIC'
+export const REQUEST_LYRIC = 'REQUEST_LYRIC'
+export const RECEIVE_LYRIC = 'RECEIVE_LYRIC'
