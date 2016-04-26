@@ -28,39 +28,51 @@ class App extends Component {
     dispatch(fetchSongs(channelId))
   }
 
+  // componentDidUpdate (prevProps, prevState) {
+  //   console.log(prevProps)
+  // }
+
   pause () {
     const { dispatch } = this.props
     dispatch(pauseSong())
   }
 
-  // like this song
+  // 加红心
   star () {
     const { dispatch, current, songs } = this.props
     const song = songs[current]
     dispatch(postLike(song.like, channelId, song.sid))
   }
 
+  // 跳过
   _skip (method) {
     const { dispatch, current, songs } = this.props
     const song = songs[current]
 
     if (songs.length <= current + 2) {
-      dispatch(fetchMoreSongs(channelId, song.sid, () => dispatch(method())))
+      dispatch(fetchMoreSongs(channelId, song.sid,
+        () => {
+          dispatch(method())
+          this.initLyric()
+        })
+      )
     } else {
       dispatch(method())
+      this.initLyric()
     }
   }
 
-  // next
+  // 下一首
   next () {
     this._skip(nextSong)
   }
 
-  // never play again
+  // 不再播放
   never () {
     this._skip(postNever)
   }
 
+  // 显示隐藏歌词
   showLyric () {
     const { dispatch, current, songs } = this.props
     const song = songs[current]
@@ -68,6 +80,15 @@ class App extends Component {
       dispatch(showLyric())
     } else {
       dispatch(fetchLyric(song.sid, () => dispatch(showLyric())))
+    }
+  }
+
+  // 如果是要显示歌词，在切换歌的时候，尝试获取歌词
+  initLyric () {
+    const { dispatch, current, songs, isShowLyric } = this.props
+    const song = songs[current]
+    if (isShowLyric && !song.lyric) {
+      dispatch(fetchLyric(song.sid))
     }
   }
 
@@ -95,8 +116,7 @@ App.PropTypes = {
 }
 
 function mapStateToProps (state) {
-  // const { pause, current, songs, isShowLyric } = state
-  return { ...state }
+  return state
 }
 
 export default connect(mapStateToProps)(App)

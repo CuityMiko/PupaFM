@@ -33,7 +33,6 @@ class Lyric extends Component {
 }
 
 Lyric.propTypes = {
-  lyric: PropTypes.string.isRequired,
   closeLyric: PropTypes.func.isRequired
 }
 
