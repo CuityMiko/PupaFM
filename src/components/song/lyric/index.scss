@@ -27,6 +27,10 @@
       -webkit-user-select: text;
       user-select: text;
       cursor: text;
+
+      &.on {
+      	color: #45a156;
+      }
     }
   }
 
