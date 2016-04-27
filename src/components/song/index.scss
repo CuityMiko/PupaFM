@@ -1,6 +1,3 @@
-.hide {
-	display: none;
-}
 
 .fullplayer {
   width: 680px;
@@ -31,27 +28,4 @@
     line-height: 12px;
   }
 
-}
-
-
-::-webkit-scrollbar {
-    width: 5px;
-}
-
-::-webkit-scrollbar-track {
-    border-radius: 5px;
-    background: rgba(0,0,0,0.1);
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background: rgba(0,0,0,0.2);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(0,0,0,0.4);
-}
-
-::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(0,0,0,0.05);
 }

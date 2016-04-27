@@ -2,6 +2,8 @@
 
 import React, { Component, PropTypes } from 'react'
 
+import Loader from '../loader'
+
 import './index.scss'
 
 const styleCover = {
@@ -11,11 +13,12 @@ const styleCover = {
 
 class Cover extends Component {
   render () {
-    const { picture, album } = this.props
+    const { picture, album, isFetchingLyric } = this.props
 
     return (
       <a className='playing-cover' href={`https://music.douban.com${album}`} target='_blank'>
         <img className='cover' style={styleCover} src={picture} />
+        { isFetchingLyric ? <Loader /> : '' }
       </a>
     )
   }
@@ -23,7 +26,8 @@ class Cover extends Component {
 
 Cover.propTypes = {
   picture: PropTypes.string.isRequired,
-  album: PropTypes.string.isRequired
+  album: PropTypes.string.isRequired,
+  isFetchingLyric: PropTypes.bool.isRequired
 }
 
 export default Cover

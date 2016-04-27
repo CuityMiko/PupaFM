@@ -9,9 +9,17 @@ import {
 } from '../actions/types'
 
 const initialState = {
+  // 是否显示歌词
   isShowLyric: false,
+  // 暂停/播放
   pause: false,
+  // 当前歌曲索引
   current: 0,
+  // 正在获取歌曲
+  isFetchingSong: false,
+  // 正在获取歌词
+  isFetchingLyric: false,
+  // 歌曲列表
   songs: [{
     singers: [{ id: '0', name: 'xwartz' }],
     title: 'douban.fm',
@@ -22,6 +30,10 @@ const initialState = {
     lyric: '',
     sid: ''
   }]
+}
+
+function _assign (target, ...sources) {
+  return Object.assign({}, target, ...sources)
 }
 
 export default function rootReducer (state = initialState, action) {
@@ -37,33 +49,35 @@ export default function rootReducer (state = initialState, action) {
     case DO_LIKE:
       return Object.assign({}, state, {
         songs: songs.map((song, index) =>
-          index === current ? Object.assign({}, song, { like: !song.like }) : song)
+          index === current ? _assign(song, { like: !song.like }) : song)
       })
 
     case DO_PAUSE:
-      return Object.assign({}, state, { pause: !pause })
+      return _assign(state, { pause: !pause })
 
     case DO_NEXT:
-      return Object.assign({}, state, { pause: false }, { current: current + 1 })
+      return _assign(state, { pause: false }, { current: current + 1 })
 
     case RECEIVE_SONGS:
-      return Object.assign({}, state, { songs: action.songs })
+      return _assign(state, { songs: action.songs })
 
     case RECEIVE_MORE:
-      return Object.assign({}, state, { songs: [...songs, ...action.songs] })
+      return _assign(state, { songs: [...songs, ...action.songs] })
 
     case SHOW_LYRIC:
-      return Object.assign({}, state, { isShowLyric: !isShowLyric })
+      return _assign(state, { isShowLyric: !isShowLyric })
 
     case RECEIVE_LYRIC:
-      return Object.assign({}, state, {
-        songs: songs.map((song, index) =>
-          index === current ? Object.assign({}, song, { lyric: action.lyric }) : song)
-      })
+      return _assign(state, { isFetchingLyric: false },
+        { songs: songs.map((song, index) =>
+            index === current ? _assign(song, { lyric: action.lyric }) : song)
+        }
+      )
 
+    case REQUEST_LYRIC:
+      return _assign(state, { isFetchingLyric: true })
     case REQUEST_SONGS:
     case REQUEST_MORE:
-    case REQUEST_LYRIC:
       return state
 
     default:

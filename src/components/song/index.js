@@ -87,7 +87,7 @@ class Song extends Component {
   }
 
   render () {
-    const { song, pause, isShowLyric } = this.props
+    const { song, pause, isShowLyric, isFetchingLyric } = this.props
 
     return (
       <div className="fullplayer">
@@ -115,7 +115,7 @@ class Song extends Component {
 
         </div>
 
-        <Cover { ...song } />
+        <Cover { ...song } isFetchingLyric={ isFetchingLyric } />
 
         <Lyric { ...song } isShowLyric={ isShowLyric }
           closeLyric={ () => { this.handleShowLyric() } }
@@ -134,7 +134,8 @@ Song.propTypes = {
   onNeverClick: PropTypes.func.isRequired,
   onShowLyric: PropTypes.func.isRequired,
   isShowLyric: PropTypes.bool.isRequired,
-  pause: PropTypes.bool.isRequired
+  pause: PropTypes.bool.isRequired,
+  isFetchingLyric: PropTypes.bool.isRequired
 }
 
 export default Song

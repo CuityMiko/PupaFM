@@ -14,6 +14,8 @@ import { nextSong,
 
 import Song from '../components/song'
 
+import './base.scss'
+
 const channelId = '100'
 // const sid = '1885670'
 
@@ -93,10 +95,13 @@ class App extends Component {
   }
 
   render () {
-    const { current, songs, pause, isShowLyric } = this.props
+    const { current, songs, pause, isShowLyric, isFetchingLyric } = this.props
     const song = songs[current]
     return (
-      <Song song={ song } pause={ pause } isShowLyric={ isShowLyric }
+      <Song song={ song }
+        pause={ pause }
+        isShowLyric={ isShowLyric }
+        isFetchingLyric={ isFetchingLyric }
         onPauseClick={ () => { this.pause() } }
         onStarClick={ () => { this.star() } }
         onNextClick={ () => { this.next() } }
@@ -108,10 +113,11 @@ class App extends Component {
 }
 
 App.PropTypes = {
+  pause: PropTypes.bool.isRequired,
   current: PropTypes.number.isRequired,
   songs: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  pause: PropTypes.bool.isRequired,
   isShowLyric: PropTypes.bool.isRequired,
+  isFetchingLyric: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
