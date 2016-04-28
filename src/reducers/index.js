@@ -36,29 +36,22 @@ function _assign (target, ...sources) {
   return Object.assign({}, target, ...sources)
 }
 
-// 解析歌词
 function parseLyric (lyric) {
-  var result = []
-  var lines = lyric.split('\n')
+  let result = []
+  let lines = lyric.split('\n')
 
   lines.forEach((line) => {
-    var times = []
+    let time
 
     line = line.replace(/\[(\d+):(\d+?(\.)?\d+)\]/g, ($0, m, s) => {
-      times.push(parseInt(m) * 60 + parseFloat(s))
+      time = parseInt(m) * 60 + parseFloat(s)
       return ''
     })
 
-    times.forEach((time, i) => {
-      result.push({
-        time: time,
-        text: line
-      })
+    result.push({
+      time: time,
+      text: line
     })
-  })
-
-  result = result.sort((a, b) => {
-    return a.time - b.time
   })
 
   return result
