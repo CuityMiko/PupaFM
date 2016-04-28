@@ -6,32 +6,52 @@ import './index.scss'
 
 class Lyric extends Component {
 
-  renderLyric () {
+  componentDidUpdate () {
+    this.scrollLyric()
+  }
+
+  getCurrent () {
     let { lyric, time } = this.props
+    lyric = lyric || []
+
+    let cLine = 0
+    let len = lyric.length
+    for (let i = 0; i < len; i++) {
+      if (time < lyric[i].time) {
+        cLine = i === 0 ? 0 : i - 1
+        break
+      }
+    }
+
+    return cLine
+  }
+
+  scrollLyric () {
+    const { isShowLyric } = this.props
+    if (!isShowLyric) return
+
+    const index = this.getCurrent()
+    const top = 28 * (index - 4 < 0 ? 0 : index - 4)
+    this.refs.lyric.scrollTop = top
+    console.log(top)
+  }
+
+  renderLyric () {
+    let { lyric } = this.props
     lyric = lyric || []
 
     let ldiv
     let len = lyric.length
-    let cLine = 0
-
     if (len) {
-      for (let i = 0; i < len; i++) {
-        if (time < lyric[i].time) {
-          cLine = i === 0 ? 0 : i - 1
-          break
-        }
-      }
-
+      const cLine = this.getCurrent()
       let lyricNodes = lyric.map((l, index) => {
         return <p key={ index }
           className={ cLine === index ? 'on' : '' }>{ l.text }</p>
       })
-
       ldiv = <div className="ps-container">{ lyricNodes }</div>
     } else {
       ldiv = <div className="no-lyric">暂无歌词</div>
     }
-
     return ldiv
   }
 
@@ -40,7 +60,7 @@ class Lyric extends Component {
 
     return (
       <div className={ isShowLyric ? 'playing-lyric' : 'hide' }>
-        <div className="lyric">
+        <div className="lyric" ref="lyric">
           { this.renderLyric() }
         </div>
         <div className="lyric-toolbar">

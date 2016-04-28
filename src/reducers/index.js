@@ -49,6 +49,7 @@ function parseLyric (lyric) {
       return ''
     })
 
+    // 循环歌词
     times.forEach((time, i) => {
       result.push({
         time: time,
