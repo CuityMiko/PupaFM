@@ -27,13 +27,41 @@ const initialState = {
     url: 'https://xwartz.github.com',
     picture: 'https://img3.doubanio.com/lpic/s7052285.jpg',
     like: false,
-    lyric: '',
+    lyric: [],
     sid: ''
   }]
 }
 
 function _assign (target, ...sources) {
   return Object.assign({}, target, ...sources)
+}
+
+// 解析歌词
+function parseLyric (lyric) {
+  var result = []
+  var lines = lyric.split('\n')
+
+  lines.forEach((line) => {
+    var times = []
+
+    line = line.replace(/\[(\d+):(\d+?(\.)?\d+)\]/g, ($0, m, s) => {
+      times.push(parseInt(m) * 60 + parseFloat(s))
+      return ''
+    })
+
+    times.forEach((time, i) => {
+      result.push({
+        time: time,
+        text: line
+      })
+    })
+  })
+
+  result = result.sort((a, b) => {
+    return a.time - b.time
+  })
+
+  return result
 }
 
 export default function rootReducer (state = initialState, action) {
@@ -70,7 +98,8 @@ export default function rootReducer (state = initialState, action) {
     case RECEIVE_LYRIC:
       return _assign(state, { isFetchingLyric: false },
         { songs: songs.map((song, index) =>
-            index === current ? _assign(song, { lyric: action.lyric }) : song)
+            index === current ? _assign(song,
+              { lyric: parseLyric(action.lyric) }) : song)
         }
       )
 

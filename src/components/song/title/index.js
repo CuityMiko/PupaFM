@@ -6,6 +6,15 @@ import './index.scss'
 
 class SongTitle extends Component {
 
+  // 格式化时间
+  formatTime (n) {
+    var m = Math.floor(n / 60)
+    var s = Math.ceil(n % 60)
+    m = m < 10 ? '0' + m : m
+    s = s < 10 ? '0' + s : s
+    return m + ':' + s
+  }
+
   render () {
     const { onPause, singers, album, title, time, pause } = this.props
 
@@ -29,7 +38,7 @@ class SongTitle extends Component {
         <div className='subtitle'>
           { singerNodes }
           <div className='fr'>
-            <span className='time'>{ time }</span>
+            <span className='time'>{ this.formatTime(time) }</span>
             <span onClick={ () => { onPause() } }
               className={ 'iconfont ' + (pause ? 'icon-play' : 'icon-pause') }>
             </span>
@@ -45,7 +54,7 @@ SongTitle.propTypes = {
   singers: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   album: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  time: PropTypes.string.isRequired,
+  time: PropTypes.number.isRequired,
   pause: PropTypes.bool.isRequired
 }
 

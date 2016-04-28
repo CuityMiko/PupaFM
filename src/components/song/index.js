@@ -16,7 +16,7 @@ class Song extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      time: '0.00',
+      time: 0,
       percent: '0%'
     }
   }
@@ -67,7 +67,7 @@ class Song extends Component {
 
       this.updateState({
         percent: pt / dt * 100 + '%',
-        time: this.formatTime(pt)
+        time: pt
       })
     })
 
@@ -75,15 +75,6 @@ class Song extends Component {
     this.refs.player.addEventListener('ended', () => {
       this.handleNext()
     })
-  }
-
-  // 格式化时间
-  formatTime (n) {
-    var m = Math.floor(n / 60)
-    var s = Math.ceil(n % 60)
-    m = m < 10 ? '0' + m : m
-    s = s < 10 ? '0' + s : s
-    return m + ':' + s
   }
 
   render () {
@@ -118,6 +109,7 @@ class Song extends Component {
         <Cover { ...song } isFetchingLyric={ isFetchingLyric } />
 
         <Lyric { ...song } isShowLyric={ isShowLyric }
+          time={ this.state.time }
           closeLyric={ () => { this.handleShowLyric() } }
         />
 
