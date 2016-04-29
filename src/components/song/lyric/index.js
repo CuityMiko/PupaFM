@@ -33,7 +33,6 @@ class Lyric extends Component {
     const index = this.getCurrent()
     const top = 28 * (index - 4 < 0 ? 0 : index - 4)
     this.refs.lyric.scrollTop = top
-    console.log(top)
   }
 
   renderLyric () {
