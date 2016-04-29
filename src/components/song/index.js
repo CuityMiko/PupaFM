@@ -110,7 +110,6 @@ class Song extends Component {
 
         <Lyric { ...song } isShowLyric={ isShowLyric }
           time={ this.state.time }
-          closeLyric={ () => { this.handleShowLyric() } }
         />
 
       </div>

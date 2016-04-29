@@ -27,8 +27,9 @@ class Lyric extends Component {
   }
 
   scrollLyric () {
-    const { isShowLyric } = this.props
-    if (!isShowLyric) return
+    const { isShowLyric, lyric } = this.props
+
+    if (!isShowLyric || !lyric) return
 
     const index = this.getCurrent()
     const top = 28 * (index - 4 < 0 ? 0 : index - 4)
@@ -55,23 +56,25 @@ class Lyric extends Component {
   }
 
   render () {
-    const { closeLyric, isShowLyric } = this.props
+    const { isShowLyric } = this.props
 
     return (
       <div className={ isShowLyric ? 'playing-lyric' : 'hide' }>
         <div className="lyric" ref="lyric">
           { this.renderLyric() }
         </div>
-        <div className="lyric-toolbar">
-          <a href="javascript:;" onClick={ () => closeLyric() } >关闭歌词</a>
-        </div>
+        {
+          // <div className="lyric-toolbar">
+          //   <a href="javascript:;" onClick={ () => closeLyric() } >关闭歌词</a>
+          // </div>
+        }
       </div>
     )
   }
 }
 
 Lyric.propTypes = {
-  closeLyric: PropTypes.func.isRequired
+  isShowLyric: PropTypes.bool.isRequired
 }
 
 export default Lyric
