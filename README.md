@@ -3,7 +3,7 @@
 
 豆瓣FM桌面应用, 目前正在开发中...
 
-
+[![Build Status](https://travis-ci.org/xwartz/douban.fm.svg?branch=master)](https://travis-ci.org/xwartz/douban.fm)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 [![Dependency Status](https://david-dm.org/xwartz/douban.fm.svg?style=flat-square)](https://david-dm.org/xwartz/douban.fm)
 [![MIT Licensed](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://opensource.org/licenses/MIT)
