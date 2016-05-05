@@ -1,0 +1,10 @@
+anguage: node_js
+sudo: false
+node_js:
+  - 'node'
+install:
+  - npm i
+script:
+	- npm run lint
+	- npm run package
+	- npm run builder
