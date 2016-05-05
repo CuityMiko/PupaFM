@@ -9,14 +9,23 @@ import { nextSong,
   fetchMoreSongs,
   fetchSongs,
   showLyric,
-  fetchLyric
+  fetchLyric,
+  changeChannel
 } from '../actions'
 
 import Song from '../components/song'
+import Channels from '../components/channel'
 
 import './base.scss'
 
-const channelId = '100'
+const channels = [{
+  id: 0,
+  name: '我的私人兆赫'
+}, {
+  id: -10,
+  name: '豆瓣精选兆赫'
+}]
+
 // const sid = '1885670'
 
 class App extends Component {
@@ -26,13 +35,16 @@ class App extends Component {
   // }
 
   componentDidMount () {
-    const { dispatch } = this.props
+    const { dispatch, channelId } = this.props
     dispatch(fetchSongs(channelId))
   }
 
-  // componentDidUpdate (prevProps, prevState) {
-  //   console.log(prevProps)
-  // }
+  componentDidUpdate (prevProps, prevState) {
+    const { dispatch, channelId } = this.props
+    if (prevProps.channelId !== channelId) {
+      dispatch(fetchSongs(channelId))
+    }
+  }
 
   pause () {
     const { dispatch } = this.props
@@ -41,14 +53,14 @@ class App extends Component {
 
   // 加红心
   star () {
-    const { dispatch, current, songs } = this.props
+    const { dispatch, current, songs, channelId } = this.props
     const song = songs[current]
     dispatch(postLike(song.like, channelId, song.sid))
   }
 
   // 跳过
   _skip (method) {
-    const { dispatch, current, songs } = this.props
+    const { dispatch, current, songs, channelId } = this.props
     const song = songs[current]
 
     if (songs.length <= current + 2) {
@@ -94,25 +106,39 @@ class App extends Component {
     }
   }
 
+  onChannel (id) {
+    const { dispatch } = this.props
+    dispatch(changeChannel(id))
+  }
+
   render () {
-    const { current, songs, pause, isShowLyric, isFetchingLyric } = this.props
+    const { current, songs, pause, isShowLyric, isFetchingLyric, channelId } = this.props
     const song = songs[current]
     return (
-      <Song song={ song }
-        pause={ pause }
-        isShowLyric={ isShowLyric }
-        isFetchingLyric={ isFetchingLyric }
-        onPauseClick={ () => { this.pause() } }
-        onStarClick={ () => { this.star() } }
-        onNextClick={ () => { this.next() } }
-        onNeverClick={ () => { this.never() } }
-        onShowLyric={ this.showLyric.bind(this) }
-      />
+      <div className="cl-player">
+
+        <Channels channels={ channels }
+          channelId = { channelId }
+          onChannel={ this.onChannel.bind(this) }
+        />
+
+        <Song song={ song }
+          pause={ pause }
+          isShowLyric={ isShowLyric }
+          isFetchingLyric={ isFetchingLyric }
+          onPauseClick={ () => { this.pause() } }
+          onStarClick={ () => { this.star() } }
+          onNextClick={ () => { this.next() } }
+          onNeverClick={ () => { this.never() } }
+          onShowLyric={ this.showLyric.bind(this) }
+        />
+      </div>
     )
   }
 }
 
 App.PropTypes = {
+  channelId: PropTypes.number.isRequired,
   pause: PropTypes.bool.isRequired,
   current: PropTypes.number.isRequired,
   songs: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,

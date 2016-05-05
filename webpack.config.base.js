@@ -16,8 +16,8 @@ export default {
       test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
       loader: 'url'
     }, {
-      test: /\.(png|jpg)$/,
-      loader: 'url?limit=10240'
+      test: /\.(png|jpg|gif)$/,
+      loader: 'url?limit=10000!img?progressive=true'
     }],
     noParse: /node_modules\/json-schema\/lib\/validate\.js/
   },

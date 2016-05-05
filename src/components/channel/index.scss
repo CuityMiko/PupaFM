@@ -1,0 +1,33 @@
+.channels {
+	width: 680px;
+	height: 50px;
+	margin: 0 auto;
+	padding: 20px;
+
+	li {
+		float: right;
+		padding: 5px 15px;
+		list-style: none;
+	}
+
+	span {
+		padding: 0 2px;
+	}
+
+	a {
+		color: #333;
+		text-decoration: none;
+	}
+
+	.c-playing {
+		display: none;
+	}
+
+	.active .c-playing {
+    display: inline-block;
+    background: url(../../assets/channel.gif) no-repeat;
+    width: 11px;
+    height: 11px;
+	}
+
+}

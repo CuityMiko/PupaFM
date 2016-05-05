@@ -84,6 +84,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "fbjs-scripts": "^0.6.0",
     "html-webpack-plugin": "^2.16.0",
+    "img-loader": "^1.2.2",
     "json-loader": "^0.5.4",
     "node-sass": "^3.5.3",
     "redux-devtools": "^3.2.0",

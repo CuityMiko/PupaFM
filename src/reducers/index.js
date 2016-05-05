@@ -5,10 +5,12 @@
 import {
   DO_NEVER, DO_LIKE, DO_NEXT, DO_PAUSE,
   REQUEST_SONGS, RECEIVE_SONGS, REQUEST_MORE, RECEIVE_MORE,
-  SHOW_LYRIC, REQUEST_LYRIC, RECEIVE_LYRIC
+  SHOW_LYRIC, REQUEST_LYRIC, RECEIVE_LYRIC,
+  CHANGE_CHANNEL
 } from '../actions/types'
 
 const initialState = {
+  channelId: 0,
   // 是否显示歌词
   isShowLyric: false,
   // 暂停/播放
@@ -109,6 +111,9 @@ export default function rootReducer (state = initialState, action) {
     case REQUEST_SONGS:
     case REQUEST_MORE:
       return state
+
+    case CHANGE_CHANNEL:
+      return _assign(state, { channelId: action.channelId })
 
     default:
       return state

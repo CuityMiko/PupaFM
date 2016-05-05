@@ -111,3 +111,7 @@ export function fetchLyric (sid, cb) {
       })
   }
 }
+
+export function changeChannel (channelId) {
+  return { type: types.CHANGE_CHANNEL, channelId }
+}

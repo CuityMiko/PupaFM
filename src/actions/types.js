@@ -19,3 +19,5 @@ export const RECEIVE_MORE = 'RECEIVE_MORE'
 export const SHOW_LYRIC = 'SHOW_LYRIC'
 export const REQUEST_LYRIC = 'REQUEST_LYRIC'
 export const RECEIVE_LYRIC = 'RECEIVE_LYRIC'
+
+export const CHANGE_CHANNEL = 'CHANGE_CHANNEL'
