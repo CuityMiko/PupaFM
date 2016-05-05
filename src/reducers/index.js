@@ -90,7 +90,7 @@ export default function rootReducer (state = initialState, action) {
       return _assign(state, { pause: false }, { current: current + 1 })
 
     case RECEIVE_SONGS:
-      return _assign(state, { songs: action.songs })
+      return _assign(state, { current: 0 }, { songs: action.songs })
 
     case RECEIVE_MORE:
       return _assign(state, { songs: [...songs, ...action.songs] })
