@@ -6,10 +6,11 @@ import Loader from '../loader'
 
 import './index.scss'
 
-const styleCover = {
-  width: 206,
-  borderRadius: '50%'
-}
+// const styleCover = {
+//   width: 206,
+//   borderRadius: '50%',
+//   background: this.props.picture
+// }
 
 class Cover extends Component {
   render () {
@@ -17,7 +18,7 @@ class Cover extends Component {
 
     return (
       <a className='playing-cover' href={`https://music.douban.com${album}`} target='_blank'>
-        <img className='cover' style={styleCover} src={picture} />
+        <div className='cover' style={{ backgroundImage: 'url(' + picture + ')' }} ></div>
         { isFetchingLyric ? <Loader /> : '' }
       </a>
     )
