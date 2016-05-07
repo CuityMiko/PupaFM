@@ -5,6 +5,14 @@ import Channel from './item'
 
 import './index.scss'
 
+const channels = [{
+  id: 0,
+  name: '我的私人兆赫'
+}, {
+  id: -10,
+  name: '豆瓣精选兆赫'
+}]
+
 class Channels extends Component {
 
   handleChannel (id) {
@@ -12,7 +20,7 @@ class Channels extends Component {
   }
 
   render () {
-    const { channels, channelId } = this.props
+    const { channelId } = this.props
     const channelNodes = channels.map((channel) => {
       return (
         <Channel { ...channel } key={ channel.id }
@@ -30,8 +38,7 @@ class Channels extends Component {
 }
 
 Channels.propTypes = {
-  onChannel: PropTypes.func.isRequired,
-  channels: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
+  onChannel: PropTypes.func.isRequired
 }
 
 export default Channels

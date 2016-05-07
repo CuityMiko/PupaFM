@@ -18,14 +18,6 @@ import Channels from '../components/channel'
 
 import './base.scss'
 
-const channels = [{
-  id: 0,
-  name: '我的私人兆赫'
-}, {
-  id: -10,
-  name: '豆瓣精选兆赫'
-}]
-
 // const sid = '1885670'
 
 class App extends Component {
@@ -117,8 +109,7 @@ class App extends Component {
     return (
       <div className="cl-player">
 
-        <Channels channels={ channels }
-          channelId = { channelId }
+        <Channels channelId = { channelId }
           onChannel={ this.onChannel.bind(this) }
         />
 
