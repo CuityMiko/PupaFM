@@ -10,6 +10,8 @@ import {
 } from '../actions/types'
 
 const initialState = {
+  // login
+  userInfo: {},
   channelId: 0,
   // 是否显示歌词
   isShowLyric: false,

@@ -100,6 +100,7 @@
   },
   "dependencies": {
     "dbfm-app-sdk": "0.0.9",
+    "dbfm-web-sdk": "0.0.5",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-redux": "^4.4.5",

@@ -1,6 +1,6 @@
 'use strict'
 
-import operate from './api'
+import { operate, webOperate } from './api'
 import * as types from './types'
 
 export function nextSong () {
@@ -114,4 +114,23 @@ export function fetchLyric (sid, cb) {
 
 export function changeChannel (channelId) {
   return { type: types.CHANGE_CHANNEL, channelId }
+}
+
+// login
+function requestLogin () {
+  return { type: types.REQUEST_LOGIN }
+}
+
+function receiveLogin (userInfo) {
+  return { type: types.RECEIVE_LOGIN, userInfo }
+}
+
+export function login (opt) {
+  return (dispatch) => {
+    dispatch(requestLogin())
+    return webOperate('login', opt, (userInfo) => {
+      console.log(userInfo)
+      dispatch(receiveLogin(userInfo))
+    })
+  }
 }

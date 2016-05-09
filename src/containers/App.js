@@ -10,11 +10,13 @@ import { nextSong,
   fetchSongs,
   showLyric,
   fetchLyric,
-  changeChannel
+  changeChannel,
+  login
 } from '../actions'
 
 import Song from '../components/song'
 import Channels from '../components/channel'
+import Login from '../components/login'
 
 import './base.scss'
 
@@ -103,6 +105,12 @@ class App extends Component {
     dispatch(changeChannel(id))
   }
 
+  login (opt) {
+    console.log(opt)
+    const { dispatch } = this.props
+    dispatch(login(opt))
+  }
+
   render () {
     const { current, songs, pause, isShowLyric, isFetchingLyric, channelId } = this.props
     const song = songs[current]
@@ -123,6 +131,9 @@ class App extends Component {
           onNeverClick={ () => { this.never() } }
           onShowLyric={ this.showLyric.bind(this) }
         />
+
+        <Login login={ (opt) => { this.login(opt) } } />
+
       </div>
     )
   }
