@@ -73,7 +73,7 @@ class Login extends Component {
               onChange={ this.handleCaptchaChange.bind(this) }
             />
           </div>
-          <img alt="captcha" width="130" height="35" class="captcha" title="看不清楚?点图片可以换一个"
+          <img alt="captcha" width="130" height="35" title="看不清楚?点图片可以换一个"
             src={ 'http://douban.fm/misc/captcha?size=m&id=' + this.state.captcha_id }
             onClick={ this.handleCaptchaClick.bind(this) }
           />
