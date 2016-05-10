@@ -46,6 +46,7 @@ class Login extends Component {
 
   render () {
     return (
+      <div className="overlay">
       <div className="pop">
         <form className="login-form" onSubmit={ this.handleSubmit.bind(this) } >
           <p className="legend">登录</p>
@@ -84,6 +85,7 @@ class Login extends Component {
           </div>
 
         </form>
+      </div>
       </div>
     )
   }

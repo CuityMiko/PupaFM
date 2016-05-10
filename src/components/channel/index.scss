@@ -1,12 +1,36 @@
+.channels-wrap {
+	display: inline-block;
+	height: 16px;
+  line-height: 16px;
+  color: #7c7b82;
+  font-size: 12px;
+  font-weight: 400;
+  margin-right: 30px;
+  position: relative;
+  z-index: 1;
+
+  .channels-title {
+  	padding-left: 5px;
+  }
+
+  &:hover {
+  	.channels {
+  		display: block;
+  	}
+  }
+}
+
 .channels {
-	width: 680px;
-	height: 50px;
-	margin: 0 auto;
-	padding: 20px;
+	display: none;
+	width: 210px;
+	padding: 10px;
+	border: 1px solid #e1e1e1;
+	background-color: #fbfbfb;
 
 	li {
-		float: right;
-		padding: 5px 15px;
+		float: left;
+		min-width: 90px;
+		padding: 5px;
 		list-style: none;
 	}
 
