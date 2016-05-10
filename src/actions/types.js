@@ -24,3 +24,5 @@ export const CHANGE_CHANNEL = 'CHANGE_CHANNEL'
 
 export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export const RECEIVE_LOGIN = 'RECEIVE_LOGIN'
+
+export const SHOW_LOGIN = 'SHOW_LOGIN'

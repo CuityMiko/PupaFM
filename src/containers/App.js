@@ -11,12 +11,14 @@ import { nextSong,
   showLyric,
   fetchLyric,
   changeChannel,
-  login
+  login,
+  loginPop
 } from '../actions'
 
 import Song from '../components/song'
 import Channels from '../components/channel'
 import Login from '../components/login'
+import User from '../components/user'
 
 import './base.scss'
 
@@ -111,15 +113,25 @@ class App extends Component {
     dispatch(login(opt))
   }
 
+  handleLogin () {
+    const { dispatch } = this.props
+    dispatch(loginPop())
+  }
+
   render () {
-    const { current, songs, pause, isShowLyric, isFetchingLyric, channelId } = this.props
+    const { current, songs, pause, isShowLyric, isFetchingLyric, channelId, userInfo, isPop } = this.props
     const song = songs[current]
     return (
       <div className="cl-player">
 
-        <Channels channelId = { channelId }
-          onChannel={ this.onChannel.bind(this) }
-        />
+        <div className="cl-fr">
+          <Channels channelId = { channelId }
+            onChannel={ this.onChannel.bind(this) }
+          />
+          <User userInfo={ userInfo }
+            handlePop={ this.handleLogin.bind(this) }
+          />
+        </div>
 
         <Song song={ song }
           pause={ pause }
@@ -132,7 +144,10 @@ class App extends Component {
           onShowLyric={ this.showLyric.bind(this) }
         />
 
-        <Login login={ (opt) => { this.login(opt) } } />
+        <Login isPop={ isPop }
+          login={ (opt) => { this.login(opt) } }
+          handlePop={ this.handleLogin.bind(this) }
+        />
 
       </div>
     )

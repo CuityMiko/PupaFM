@@ -21,6 +21,18 @@ ul, ol {
 	display: none;
 }
 
+a {
+	color: #7c7b82;
+	text-decoration: none;
+}
+
+.cl-player {
+	  width: 680px;
+	  height: 400px;
+    position: relative;
+    margin: 0 auto;
+}
+
 ::-webkit-scrollbar {
     width: 0;
 }

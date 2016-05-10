@@ -128,9 +128,15 @@ function receiveLogin (userInfo) {
 export function login (opt) {
   return (dispatch) => {
     dispatch(requestLogin())
-    return webOperate('login', opt, (userInfo) => {
-      console.log(userInfo)
-      dispatch(receiveLogin(userInfo))
+    return webOperate('login', opt, (data) => {
+      console.log(data)
+      if (data.body.r === 0) {
+        dispatch(receiveLogin(data.body.user_info))
+      }
     })
   }
+}
+
+export function loginPop () {
+  return { type: types.SHOW_LOGIN }
 }

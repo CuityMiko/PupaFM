@@ -45,9 +45,11 @@ class Login extends Component {
   }
 
   render () {
+    const { handlePop, isPop } = this.props
     return (
-      <div className="overlay">
+      <div className="overlay" style={{ display: isPop ? 'block' : 'none' }}>
       <div className="pop">
+        <a href="javascript:;" className="close" onClick={ handlePop }>x</a>
         <form className="login-form" onSubmit={ this.handleSubmit.bind(this) } >
           <p className="legend">登录</p>
           <div className="error">密码不正确</div>

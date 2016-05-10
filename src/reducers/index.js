@@ -9,12 +9,14 @@ import {
   REQUEST_SONGS, RECEIVE_SONGS, REQUEST_MORE, RECEIVE_MORE,
   SHOW_LYRIC, REQUEST_LYRIC, RECEIVE_LYRIC,
   CHANGE_CHANNEL,
-  RECEIVE_LOGIN
+  RECEIVE_LOGIN,
+  SHOW_LOGIN
 } from '../actions/types'
 
 const initialState = {
   // login
   userInfo: {},
+  isPop: false,
   channelId: 0,
   // 是否显示歌词
   isShowLyric: false,
@@ -69,7 +71,7 @@ function parseLyric (lyric) {
 }
 
 export default function rootReducer (state = initialState, action) {
-  const { songs, current, pause, isShowLyric } = state
+  const { songs, current, pause, isShowLyric, isPop } = state
 
   switch (action.type) {
     case DO_NEVER:
@@ -118,6 +120,8 @@ export default function rootReducer (state = initialState, action) {
 
     case RECEIVE_LOGIN:
       return assign(state, { userInfo: action.userInfo })
+    case SHOW_LOGIN:
+      return assign(state, { isPop: !isPop })
 
     default:
       return state
