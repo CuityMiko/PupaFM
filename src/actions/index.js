@@ -125,6 +125,10 @@ function receiveLogin (userInfo) {
   return { type: types.RECEIVE_LOGIN, userInfo }
 }
 
+function loginError (errMsg) {
+  return { type: types.ERROR_LOGIN, errMsg }
+}
+
 export function login (opt) {
   return (dispatch) => {
     dispatch(requestLogin())
@@ -132,6 +136,9 @@ export function login (opt) {
       console.log(data)
       if (data.body.r === 0) {
         dispatch(receiveLogin(data.body.user_info))
+        dispatch(loginPop())
+      } else {
+        dispatch(loginError(data.body.err_msg))
       }
     })
   }

@@ -34,7 +34,6 @@ class Login extends Component {
 
   handleCaptchaClick (e) {
     webOperate('captcha_id', null, (id) => {
-      console.log(id)
       this.setState({ captcha_id: id })
     })
   }
@@ -42,6 +41,17 @@ class Login extends Component {
   handleSubmit (e) {
     e.preventDefault()
     this.props.login(this.state)
+  }
+
+  renderError () {
+    const { errMsg } = this.props
+    if (!errMsg) {
+      return ''
+    } else {
+      return (
+        <div className="error" style={{ display: 'block' }}>{ errMsg }</div>
+      )
+    }
   }
 
   render () {
@@ -52,7 +62,7 @@ class Login extends Component {
         <a href="javascript:;" className="close" onClick={ handlePop }>x</a>
         <form className="login-form" onSubmit={ this.handleSubmit.bind(this) } >
           <p className="legend">登录</p>
-          <div className="error">密码不正确</div>
+          { this.renderError() }
           <div className="item spec">
             <label for="email">邮箱 / 用户名</label>
             <input type="text" id="email" name="email" className="text email" tabindex="1"

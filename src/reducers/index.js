@@ -10,13 +10,15 @@ import {
   SHOW_LYRIC, REQUEST_LYRIC, RECEIVE_LYRIC,
   CHANGE_CHANNEL,
   RECEIVE_LOGIN,
-  SHOW_LOGIN
+  SHOW_LOGIN,
+  ERROR_LOGIN
 } from '../actions/types'
 
 const initialState = {
   // login
   userInfo: {},
   isPop: false,
+  errMsg: '',
   channelId: 0,
   // 是否显示歌词
   isShowLyric: false,
@@ -119,9 +121,11 @@ export default function rootReducer (state = initialState, action) {
       return assign(state, { channelId: action.channelId })
 
     case RECEIVE_LOGIN:
-      return assign(state, { userInfo: action.userInfo })
+      return assign(state, { userInfo: action.userInfo, errMsg: '' })
     case SHOW_LOGIN:
       return assign(state, { isPop: !isPop })
+    case ERROR_LOGIN:
+      return assign(state, { errMsg: action.errMsg })
 
     default:
       return state

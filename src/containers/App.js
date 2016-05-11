@@ -119,7 +119,8 @@ class App extends Component {
   }
 
   render () {
-    const { current, songs, pause, isShowLyric, isFetchingLyric, channelId, userInfo, isPop } = this.props
+    const { current, songs, pause, isShowLyric, isFetchingLyric, channelId,
+      userInfo, isPop, errMsg } = this.props
     const song = songs[current]
     return (
       <div className="cl-player">
@@ -144,7 +145,7 @@ class App extends Component {
           onShowLyric={ this.showLyric.bind(this) }
         />
 
-        <Login isPop={ isPop }
+        <Login isPop={ isPop } errMsg={ errMsg }
           login={ (opt) => { this.login(opt) } }
           handlePop={ this.handleLogin.bind(this) }
         />

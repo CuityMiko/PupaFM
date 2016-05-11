@@ -26,3 +26,4 @@ export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export const RECEIVE_LOGIN = 'RECEIVE_LOGIN'
 
 export const SHOW_LOGIN = 'SHOW_LOGIN'
+export const ERROR_LOGIN = 'ERROR_LOGIN'
