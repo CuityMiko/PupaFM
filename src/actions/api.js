@@ -1,4 +1,4 @@
-import WebSDK from 'dbfm-web-sdk'
+import WebSDK from 'doubanfm-sdk'
 import AppSDK from 'dbfm-app-sdk'
 
 const sdk = new AppSDK()

@@ -100,7 +100,7 @@
   },
   "dependencies": {
     "dbfm-app-sdk": "0.0.9",
-    "dbfm-web-sdk": "0.0.5",
+    "doubanfm-sdk": "^1.0.4",
     "localforage": "^1.4.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
