@@ -168,7 +168,7 @@ class Song extends Component {
 }
 
 Song.propTypes = {
-  channelId: PropTypes.number.isRequired,
+  channelId: PropTypes.string.isRequired,
   pause: PropTypes.bool.isRequired,
   current: PropTypes.number.isRequired,
   songs: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,

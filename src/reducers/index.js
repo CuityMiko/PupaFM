@@ -19,7 +19,7 @@ const initialState = {
   userInfo: {},
   isPop: false,
   errMsg: '',
-  channelId: 0,
+  channelId: '0',
   // 是否显示歌词
   isShowLyric: false,
   // 暂停/播放
