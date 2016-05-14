@@ -6,11 +6,6 @@ import './index.scss'
 
 class Channel extends Component {
 
-  handleChannel () {
-    const { id } = this.props
-    this.props.channelClick(id)
-  }
-
   renderIcon () {
     return (
       <svg size="12" version="1.1" color="#5CBC7D" className="icon" viewBox="0,0,12,12" height="12" width="12" >
@@ -25,12 +20,12 @@ class Channel extends Component {
   }
 
   render () {
-    const { id, name, channelId } = this.props
+    const { id, name, channelId, channelClick } = this.props
     return (
       <li
         className={ 'channel' + (channelId === id ? ' active' : '') } key={ id }>
         { this.renderIcon() }
-        <a href='javascript:;' onClick={ this.handleChannel.bind(this) }>{ name }</a>
+        <a href='javascript:;' onClick={ channelClick }>{ name }</a>
       </li>
     )
   }

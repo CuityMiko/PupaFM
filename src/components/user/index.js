@@ -1,21 +1,19 @@
 'use strict'
 
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { loginPop } from '../../actions'
 import { isEmpty } from '../../utils'
 
 import './index.scss'
 
 class User extends Component {
 
-  handleChannel (id) {
-    this.props.onChannel(id)
-  }
-
   renderInfo () {
-    const { userInfo, handlePop } = this.props
+    const { userInfo, loginPop } = this.props
     if (isEmpty(userInfo)) {
       return (
-        <a href="javascript:;" className="login" onClick={ handlePop }>登录</a>
+        <a href="javascript:;" className="login" onClick={ loginPop }>登录</a>
       )
     } else {
       const sty = {
@@ -43,8 +41,17 @@ class User extends Component {
 
 User.propTypes = {
   userInfo: PropTypes.object.isRequired,
-  handlePop: PropTypes.func.isRequired
+  loginPop: PropTypes.func.isRequired
 }
 
-export default User
+const mapStateToProps = (state) => {
+  return state
+}
+
+const mapDispatchToProps = { loginPop }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(User)
 

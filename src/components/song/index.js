@@ -1,6 +1,17 @@
 'use strict'
 
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+
+import { nextSong,
+  pauseSong,
+  postNever,
+  postLike,
+  fetchMoreSongs,
+  fetchSongs,
+  showLyric,
+  fetchLyric
+} from '../../actions'
 
 import './index.scss'
 import '../../assets/font/iconfont.scss'
@@ -39,24 +50,62 @@ class Song extends Component {
   }
 
   handlePause () {
-    this.props.pause ? this.playSong() : this.pauseSong()
-    this.props.onPauseClick()
+    const { pause, pauseSong } = this.props
+    pause ? this.playSong() : this.pauseSong()
+    pauseSong()
+  }
+
+  // 如果是要显示歌词，在切换歌的时候，尝试获取歌词
+  initLyric () {
+    const { current, songs, isShowLyric, fetchLyric } = this.props
+    const song = songs[current]
+    if (isShowLyric && !song.lyric) {
+      fetchLyric(song.sid)
+    }
+  }
+
+  // 跳过
+  _skip (method) {
+    const { current, songs, channelId, fetchMoreSongs } = this.props
+    const song = songs[current]
+
+    if (songs.length <= current + 2) {
+      fetchMoreSongs(channelId, song.sid,
+        () => {
+          method()
+          this.initLyric()
+        })
+    } else {
+      method()
+      this.initLyric()
+    }
   }
 
   handleNext () {
-    this.props.onNextClick()
+    const { nextSong } = this.props
+    this._skip(nextSong)
   }
 
   handleStar () {
-    this.props.onStarClick()
+    const { postLike, current, songs, channelId } = this.props
+    const song = songs[current]
+    postLike(song.like, channelId, song.sid)
   }
 
   handleNever () {
-    this.props.onNeverClick()
+    const { postNever } = this.props
+    this._skip(postNever)
   }
 
+  // 显示隐藏歌词
   handleShowLyric () {
-    this.props.onShowLyric()
+    const { current, songs, showLyric, fetchLyric } = this.props
+    const song = songs[current]
+    if (song.lyric) {
+      showLyric()
+    } else {
+      fetchLyric(song.sid, showLyric)
+    }
   }
 
   listenUpdate () {
@@ -78,7 +127,8 @@ class Song extends Component {
   }
 
   render () {
-    const { song, pause, isShowLyric, isFetchingLyric } = this.props
+    const { current, songs, pause, isShowLyric, isFetchingLyric } = this.props
+    const song = songs[current]
 
     return (
       <div className="fullplayer">
@@ -87,7 +137,7 @@ class Song extends Component {
           <audio ref='player' src={ song.url } preload autoPlay />
 
           <SongTitle { ...song } time={ this.state.time } pause={ pause }
-            onPause={ () => { this.handlePause() } }
+            onPause={ this.handlePause.bind(this) }
           />
 
           <Progress percent={ this.state.percent } />
@@ -99,9 +149,9 @@ class Song extends Component {
           </div>
 
           <Controls { ...song }
-            onNext={ () => { this.handleNext() } }
-            onStar={ () => { this.handleStar() } }
-            onTrash={ () => { this.handleNever() } }
+            onNext={ this.handleNext.bind(this) }
+            onStar={ this.handleStar.bind(this) }
+            onTrash={ this.handleNever.bind(this) }
           />
 
         </div>
@@ -118,15 +168,28 @@ class Song extends Component {
 }
 
 Song.propTypes = {
-  song: PropTypes.object.isRequired,
-  onNextClick: PropTypes.func.isRequired,
-  onStarClick: PropTypes.func.isRequired,
-  onPauseClick: PropTypes.func.isRequired,
-  onNeverClick: PropTypes.func.isRequired,
-  onShowLyric: PropTypes.func.isRequired,
-  isShowLyric: PropTypes.bool.isRequired,
+  channelId: PropTypes.number.isRequired,
   pause: PropTypes.bool.isRequired,
+  current: PropTypes.number.isRequired,
+  songs: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  isShowLyric: PropTypes.bool.isRequired,
   isFetchingLyric: PropTypes.bool.isRequired
 }
 
-export default Song
+const mapStateToProps = state => state
+const mapDispatchToProps = {
+  nextSong,
+  pauseSong,
+  postNever,
+  postLike,
+  fetchMoreSongs,
+  fetchSongs,
+  showLyric,
+  fetchLyric
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Song)
+

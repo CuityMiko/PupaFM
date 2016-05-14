@@ -1,16 +1,16 @@
 'use strict'
 
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+
+import { changeChannel } from '../../actions'
+
 import Channel from './item'
 import channels from './channels'
 
 import './index.scss'
 
 class Channels extends Component {
-
-  handleChannel (id) {
-    this.props.onChannel(id)
-  }
 
   renderIcon () {
     return (
@@ -26,12 +26,12 @@ class Channels extends Component {
   }
 
   render () {
-    const { channelId } = this.props
+    const { channelId, changeChannel } = this.props
     const channelNodes = channels.map((channel) => {
       return (
         <Channel { ...channel } key={ channel.id }
           channelId={ channelId }
-          channelClick={ this.handleChannel.bind(this) }
+          channelClick={ () => { changeChannel(channel.id) } }
         />
       )
     })
@@ -48,8 +48,14 @@ class Channels extends Component {
 }
 
 Channels.propTypes = {
-  onChannel: PropTypes.func.isRequired
+  changeChannel: PropTypes.func.isRequired
 }
 
-export default Channels
+const mapStateToProps = state => state
 
+const mapDispatchToProps = { changeChannel }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Channels)

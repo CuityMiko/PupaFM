@@ -1,7 +1,10 @@
 'use strict'
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import { webOperate } from '../../actions/api'
+import { login, loginPop } from '../../actions'
 
 import './index.scss'
 
@@ -39,8 +42,9 @@ class Login extends Component {
   }
 
   handleSubmit (e) {
+    const { login } = this.props
     e.preventDefault()
-    this.props.login(this.state)
+    login(this.state)
   }
 
   renderError () {
@@ -55,11 +59,11 @@ class Login extends Component {
   }
 
   render () {
-    const { handlePop, isPop } = this.props
+    const { isPop, loginPop } = this.props
     return (
       <div className="overlay" style={{ display: isPop ? 'block' : 'none' }}>
       <div className="pop">
-        <a href="javascript:;" className="close" onClick={ handlePop }>x</a>
+        <a href="javascript:;" className="close" onClick={ loginPop }>x</a>
         <form className="login-form" onSubmit={ this.handleSubmit.bind(this) } >
           <p className="legend">登录</p>
           { this.renderError() }
@@ -103,4 +107,13 @@ class Login extends Component {
   }
 }
 
-export default Login
+const mapStateToProps = (state) => {
+  return state
+}
+
+const mapDispatchToProps = { login, loginPop }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login)
