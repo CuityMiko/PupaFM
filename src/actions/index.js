@@ -100,13 +100,13 @@ function receiveLyric (lyric) {
   return { type: types.RECEIVE_LYRIC, lyric }
 }
 
-export function fetchLyric (sid, cb) {
+export function fetchLyric (sid, ssid, cb) {
   return (dispatch) => {
     dispatch(requestLyric())
 
-    return operate('lyric', { song_id: sid },
-      (lyric) => {
-        dispatch(receiveLyric(lyric))
+    return operate('lyric', { sid, ssid },
+      (res) => {
+        dispatch(receiveLyric(res.lyric))
         cb && cb()
       })
   }

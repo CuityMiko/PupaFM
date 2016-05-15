@@ -15,7 +15,9 @@ class Login extends Component {
       alias: '',
       form_password: '',
       captcha_solution: '',
-      captcha_id: ''
+      captcha_id: '',
+      source: 'radio',
+      task: 'sync_channel_list'
     }
   }
 

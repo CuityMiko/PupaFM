@@ -99,7 +99,6 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
-    "dbfm-app-sdk": "0.0.9",
     "doubanfm-sdk": "^1.0.4",
     "localforage": "^1.4.0",
     "react": "^15.0.0",

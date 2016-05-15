@@ -60,7 +60,7 @@ class Song extends Component {
     const { current, songs, isShowLyric, fetchLyric } = this.props
     const song = songs[current]
     if (isShowLyric && !song.lyric) {
-      fetchLyric(song.sid)
+      fetchLyric(song.sid, song.ssid)
     }
   }
 
@@ -104,7 +104,7 @@ class Song extends Component {
     if (song.lyric) {
       showLyric()
     } else {
-      fetchLyric(song.sid, showLyric)
+      fetchLyric(song.sid, song.ssid, showLyric)
     }
   }
 
