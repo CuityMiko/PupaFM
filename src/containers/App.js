@@ -16,8 +16,10 @@ import './base.scss'
 class App extends Component {
 
   componentDidMount () {
-    const { fetchSongs, channelId } = this.props
-    fetchSongs(channelId)
+    const { fetchSongs, channelId, songs } = this.props
+    if (songs.length === 1 && songs[0].sid === '') {
+      fetchSongs(channelId)
+    }
   }
 
   componentDidUpdate (prevProps, prevState) {
