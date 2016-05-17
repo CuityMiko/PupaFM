@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { loginPop } from '../../actions'
+import { loginPop, logout } from '../../actions'
 import { isEmpty } from '../../utils'
 
 import './index.scss'
@@ -10,7 +10,7 @@ import './index.scss'
 class User extends Component {
 
   renderInfo () {
-    const { userInfo, loginPop } = this.props
+    const { userInfo, loginPop, logout } = this.props
     if (isEmpty(userInfo)) {
       return (
         <a href="javascript:;" className="login" onClick={ loginPop }>登录</a>
@@ -25,7 +25,7 @@ class User extends Component {
         backgroundSize: 'cover'
       }
       return (
-        <div className="avatar" style={ sty }></div>
+        <a href="javascript:;" className="avatar" style={ sty } onClick={ logout }></a>
       )
     }
   }
@@ -41,14 +41,15 @@ class User extends Component {
 
 User.propTypes = {
   userInfo: PropTypes.object.isRequired,
-  loginPop: PropTypes.func.isRequired
+  loginPop: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
   return state
 }
 
-const mapDispatchToProps = { loginPop }
+const mapDispatchToProps = { loginPop, logout }
 
 export default connect(
   mapStateToProps,

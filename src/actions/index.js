@@ -147,3 +147,7 @@ export function login (opt) {
 export function loginPop () {
   return { type: types.SHOW_LOGIN }
 }
+
+export const logout = () => {
+  return { type: types.REQUEST_LOGOUT }
+}

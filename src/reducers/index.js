@@ -11,7 +11,8 @@ import {
   CHANGE_CHANNEL,
   RECEIVE_LOGIN,
   SHOW_LOGIN,
-  ERROR_LOGIN
+  ERROR_LOGIN,
+  REQUEST_LOGOUT
 } from '../actions/types'
 
 // 解析歌词
@@ -43,7 +44,7 @@ function parseLyric (lyric) {
   return result
 }
 
-export default function rootReducer (state = initialState, action) {
+export default function rootReducer (state, action) {
   const { songs, current, pause, isShowLyric, isPop } = state
 
   switch (action.type) {
@@ -97,6 +98,8 @@ export default function rootReducer (state = initialState, action) {
       return assign(state, { isPop: !isPop })
     case ERROR_LOGIN:
       return assign(state, { errMsg: action.errMsg })
+    case REQUEST_LOGOUT:
+      return assign(state, { userInfo: {} })
 
     default:
       return state
