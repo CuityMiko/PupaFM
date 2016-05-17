@@ -16,7 +16,7 @@ let winProps = {
 if (process.env.NODE_ENV !== 'development') {
   winProps = {
     width: 800,
-    height: 350,
+    height: 435,
     frame: true,
     resizeable: false
   }

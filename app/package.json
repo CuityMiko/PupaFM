@@ -1,7 +1,7 @@
 {
   "name": "douban.fm",
   "productName": "douban.fm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "豆瓣fm的桌面应用",
   "main": "./main.js",
   "author": "xwartz <stddup@gmail.com>",
