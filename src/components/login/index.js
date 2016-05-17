@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { webOperate } from '../../actions/api'
+import { operate } from '../../actions/api'
 import { login, loginPop } from '../../actions'
 
 import './index.scss'
@@ -38,7 +38,7 @@ class Login extends Component {
   }
 
   handleCaptchaClick (e) {
-    webOperate('captcha_id', null, (id) => {
+    operate('captcha_id', null, (id) => {
       this.setState({ captcha_id: id })
     })
   }

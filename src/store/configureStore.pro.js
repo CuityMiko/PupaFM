@@ -9,7 +9,9 @@ const enhancer = compose(
   applyMiddleware(thunkMiddleware)
 )
 
-export default function configureStore (initialState) {
+const configureStore = (initialState) => {
   const store = createStore(rootReducer, initialState, enhancer)
   return store
 }
+
+export default configureStore

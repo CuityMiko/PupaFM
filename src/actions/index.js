@@ -1,31 +1,31 @@
 'use strict'
 
-import { operate, webOperate } from './api'
+import { operate } from './api'
 import * as types from './types'
 
-export function nextSong () {
+export const nextSong = () => {
   return { type: types.DO_NEXT }
 }
 
-export function pauseSong () {
+export const pauseSong = () => {
   return { type: types.DO_PAUSE }
 }
 
-function never () {
+const never = () => {
   return { type: types.DO_NEVER }
 }
 
-function like () {
+const like = () => {
   return { type: types.DO_LIKE }
 }
 
 // never play again
-function receiveNever () {
+const receiveNever = () => {
   return { type: types.RECEIVE_NEVER }
 }
 
-export function postNever (channelId, sid) {
-  return function (dispatch) {
+export const postNever = (channelId, sid) => {
+  return (dispatch) => {
     dispatch(never())
 
     return operate('never_play_again', { channel_id: channelId, sid },
@@ -34,13 +34,13 @@ export function postNever (channelId, sid) {
 }
 
 // star song
-function receiveLike () {
+const receiveLike = () => {
   return { type: types.RECEIVE_LIKE }
 }
 
-export function postLike (isLike, channelId, sid) {
+export const postLike = (isLike, channelId, sid) => {
   const method = isLike ? 'unstar' : 'star'
-  return function (dispatch) {
+  return (dispatch) => {
     dispatch(like())
 
     return operate(method, { channel_id: channelId, sid },
@@ -49,16 +49,16 @@ export function postLike (isLike, channelId, sid) {
 }
 
 // fetch more
-function requestMoreSongs (channelId, sid) {
+const requestMoreSongs = (channelId, sid) => {
   return { type: types.REQUEST_MORE, channel_id: channelId, sid }
 }
 
-function receiveMoreSongs (songs) {
+const receiveMoreSongs = (songs) => {
   return { type: types.RECEIVE_MORE, songs }
 }
 
-export function fetchMoreSongs (channelId, sid, cb) {
-  return function (dispatch) {
+export const fetchMoreSongs = (channelId, sid, cb) => {
+  return (dispatch) => {
     dispatch(requestMoreSongs(channelId, sid))
 
     return operate('songs', { channel_id: channelId, sid },
@@ -70,16 +70,16 @@ export function fetchMoreSongs (channelId, sid, cb) {
 }
 
 // fetch songs
-function requestSongs (channelId) {
+const requestSongs = (channelId) => {
   return { type: types.REQUEST_SONGS, channelId }
 }
 
-function receiveSongs (songs) {
+const receiveSongs = (songs) => {
   return { type: types.RECEIVE_SONGS, songs }
 }
 
-export function fetchSongs (channelId) {
-  return function (dispatch) {
+export const fetchSongs = (channelId) => {
+  return (dispatch) => {
     dispatch(requestSongs(channelId))
 
     return operate('songs', { channel_id: channelId },
@@ -88,19 +88,19 @@ export function fetchSongs (channelId) {
 }
 
 // lyric
-export function showLyric () {
+export const showLyric = () => {
   return { type: types.SHOW_LYRIC }
 }
 
-function requestLyric () {
+const requestLyric = () => {
   return { type: types.REQUEST_LYRIC }
 }
 
-function receiveLyric (lyric) {
+const receiveLyric = (lyric) => {
   return { type: types.RECEIVE_LYRIC, lyric }
 }
 
-export function fetchLyric (sid, ssid, cb) {
+export const fetchLyric = (sid, ssid, cb) => {
   return (dispatch) => {
     dispatch(requestLyric())
 
@@ -112,27 +112,27 @@ export function fetchLyric (sid, ssid, cb) {
   }
 }
 
-export function changeChannel (channelId) {
+export const changeChannel = (channelId) => {
   return { type: types.CHANGE_CHANNEL, channelId }
 }
 
 // login
-function requestLogin () {
+const requestLogin = () => {
   return { type: types.REQUEST_LOGIN }
 }
 
-function receiveLogin (userInfo) {
+const receiveLogin = (userInfo) => {
   return { type: types.RECEIVE_LOGIN, userInfo }
 }
 
-function loginError (errMsg) {
+const loginError = (errMsg) => {
   return { type: types.ERROR_LOGIN, errMsg }
 }
 
-export function login (opt) {
+export const login = (opt) => {
   return (dispatch) => {
     dispatch(requestLogin())
-    return webOperate('login', opt, (data) => {
+    return operate('login', opt, (data) => {
       console.log(data)
       if (data.body.r === 0) {
         dispatch(receiveLogin(data.body.user_info))
@@ -144,7 +144,7 @@ export function login (opt) {
   }
 }
 
-export function loginPop () {
+export const loginPop = () => {
   return { type: types.SHOW_LOGIN }
 }
 

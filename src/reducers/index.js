@@ -2,7 +2,7 @@
 
 // import { combineReducers } from 'redux'
 
-import { assign } from '../utils'
+import { assign, parseLyric } from '../utils'
 
 import {
   DO_NEVER, DO_LIKE, DO_NEXT, DO_PAUSE,
@@ -15,36 +15,7 @@ import {
   REQUEST_LOGOUT
 } from '../actions/types'
 
-// 解析歌词
-function parseLyric (lyric) {
-  var result = []
-  var lines = lyric.split('\n')
-
-  lines.forEach((line) => {
-    var times = []
-
-    line = line.replace(/\[(\d+):(\d+?(\.)?\d+)\]/g, ($0, m, s) => {
-      times.push(parseInt(m) * 60 + parseFloat(s))
-      return ''
-    })
-
-    // 循环歌词
-    times.forEach((time, i) => {
-      result.push({
-        time: time,
-        text: line
-      })
-    })
-  })
-
-  result = result.sort((a, b) => {
-    return a.time - b.time
-  })
-
-  return result
-}
-
-export default function rootReducer (state, action) {
+const rootReducer = (state, action) => {
   const { songs, current, pause, isShowLyric, isPop } = state
 
   switch (action.type) {
