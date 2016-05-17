@@ -21,12 +21,17 @@
 [React Router](https://github.com/reactjs/react-router),
 [React Hot Loader](https://github.com/gaearon/react-hot-loader),
 [Redux Thunk](https://github.com/gaearon/redux-thunk)
-5. 代码 lint 工具: [ESLint](http://eslint.org/)
+5. Lint: [ESLint](http://eslint.org/)
 
 ## Release Page
 [Releases](https://github.com/xwartz/douban.fm/releases)
 
 ## Development
+
+![based on](./dev.png)
+
+### Redux DevTools
+See [redux-devtools-dock-monitor](https://github.com/gaearon/redux-devtools-dock-monitor) for more information.
 
 ### Install
 
