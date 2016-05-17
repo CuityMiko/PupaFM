@@ -24,11 +24,11 @@ const receiveNever = () => {
   return { type: types.RECEIVE_NEVER }
 }
 
-export const postNever = (channelId, sid) => {
+export const postNever = (channel, sid) => {
   return (dispatch) => {
     dispatch(never())
 
-    return operate('never_play_again', { channel_id: channelId, sid },
+    return operate('never_play_again', { channel, sid },
       () => receiveNever())
   }
 }
@@ -38,30 +38,30 @@ const receiveLike = () => {
   return { type: types.RECEIVE_LIKE }
 }
 
-export const postLike = (isLike, channelId, sid) => {
+export const postLike = (isLike, channel, sid) => {
   const method = isLike ? 'unstar' : 'star'
   return (dispatch) => {
     dispatch(like())
 
-    return operate(method, { channel_id: channelId, sid },
+    return operate(method, { channel, sid },
       () => receiveLike())
   }
 }
 
 // fetch more
-const requestMoreSongs = (channelId, sid) => {
-  return { type: types.REQUEST_MORE, channel_id: channelId, sid }
+const requestMoreSongs = (channel, sid) => {
+  return { type: types.REQUEST_MORE, channel, sid }
 }
 
 const receiveMoreSongs = (songs) => {
   return { type: types.RECEIVE_MORE, songs }
 }
 
-export const fetchMoreSongs = (channelId, sid, cb) => {
+export const fetchMoreSongs = (channel, sid, cb) => {
   return (dispatch) => {
-    dispatch(requestMoreSongs(channelId, sid))
+    dispatch(requestMoreSongs(channel, sid))
 
-    return operate('songs', { channel_id: channelId, sid },
+    return operate('songs', { channel, sid },
       (songs) => {
         dispatch(receiveMoreSongs(songs))
         cb && cb()
@@ -70,19 +70,19 @@ export const fetchMoreSongs = (channelId, sid, cb) => {
 }
 
 // fetch songs
-const requestSongs = (channelId) => {
-  return { type: types.REQUEST_SONGS, channelId }
+const requestSongs = (channel) => {
+  return { type: types.REQUEST_SONGS, channel }
 }
 
 const receiveSongs = (songs) => {
   return { type: types.RECEIVE_SONGS, songs }
 }
 
-export const fetchSongs = (channelId) => {
+export const fetchSongs = (channel) => {
   return (dispatch) => {
-    dispatch(requestSongs(channelId))
+    dispatch(requestSongs(channel))
 
-    return operate('songs', { channel_id: channelId },
+    return operate('songs', { channel },
       (songs) => dispatch(receiveSongs(songs)))
   }
 }
@@ -133,7 +133,6 @@ export const login = (opt) => {
   return (dispatch) => {
     dispatch(requestLogin())
     return operate('login', opt, (data) => {
-      console.log(data)
       if (data.body.r === 0) {
         dispatch(receiveLogin(data.body.user_info))
         dispatch(loginPop())
