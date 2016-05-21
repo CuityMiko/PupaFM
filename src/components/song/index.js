@@ -8,7 +8,6 @@ import { nextSong,
   postNever,
   postLike,
   fetchMoreSongs,
-  fetchSongs,
   showLyric,
   fetchLyric
 } from '../../actions'
@@ -134,7 +133,7 @@ class Song extends Component {
       <div className="fullplayer">
         <div className="playing-info">
 
-          <audio ref='player' src={ song.url } preload autoPlay />
+          <audio ref='player' src={ song.url } preload autoPlay={ !pause } />
 
           <SongTitle { ...song } time={ this.state.time } pause={ pause }
             onPause={ this.handlePause.bind(this) }
@@ -183,7 +182,6 @@ const mapDispatchToProps = {
   postNever,
   postLike,
   fetchMoreSongs,
-  fetchSongs,
   showLyric,
   fetchLyric
 }
