@@ -1,5 +1,7 @@
 'use strict'
 
+import { ipcRenderer } from 'electron'
+
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
@@ -38,6 +40,26 @@ class Song extends Component {
 
   componentDidMount () {
     this.listenUpdate()
+  }
+
+  notification (song) {
+    const n = new Notification(song.title, {
+      icon: song.picture,
+      body: song.artist,
+      silent: true
+    })
+    setTimeout(n.close.bind(n), 3000)
+    n.onclick = () => {
+      ipcRenderer.send('showWindow')
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    const { songs, current } = this.props
+    const song = songs[current]
+    if (song.sid !== prevProps.songs[prevProps.current].sid) {
+      this.notification(song)
+    }
   }
 
   pauseSong () {
