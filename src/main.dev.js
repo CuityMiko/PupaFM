@@ -10,7 +10,8 @@ app.on('window-all-closed', () => {
 
 let winProps = {
   width: 1000,
-  height: 800
+  height: 800,
+  titleBarStyle: 'hidden-inset'
 }
 
 if (process.env.NODE_ENV !== 'development') {
@@ -18,14 +19,13 @@ if (process.env.NODE_ENV !== 'development') {
     width: 800,
     height: 435,
     frame: true,
-    resizeable: false
+    resizeable: false,
+    titleBarStyle: 'hidden-inset'
   }
 }
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow(winProps)
-
-  // mainWindow.loadURL('http://douban.fm')
 
   mainWindow.loadURL(`file://${__dirname}/index.html`)
 
