@@ -2,7 +2,7 @@
   "name": "douban.fm",
   "productName": "douban.fm",
   "version": "1.0.0",
-  "description": "豆瓣fm的桌面应用",
+  "description": "douban.fm Music Desktop Player",
   "main": "./src/main.dev.js",
   "scripts": {
     "lint": "eslint src test *.js",
