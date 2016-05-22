@@ -18,11 +18,15 @@ class SongTitle extends Component {
   render () {
     const { onPause, singers, album, title, time, pause } = this.props
 
-    let singerNodes = singers.map((singer) => {
+    const singerNodes = singers.map((singer, index) => {
+      let name = singer.name
+      if (index > 0) {
+        name = ' / ' + name
+      }
       return (
         <a key={ singer.id }
            href={ `http://douban.fm/artist/${singer.id}` } target='_blank'>
-          { singer.name }
+          { name }
         </a>
       )
     })
