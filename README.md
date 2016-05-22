@@ -1,7 +1,7 @@
-## douban.fm
+## PupaFM
 ![screen](./screen.png)
 
-douban.fm Music Desktop Player.
+[douban.fm](https://douban.fm) Music Desktop Player.
 
 [![Build Status](https://travis-ci.org/xwartz/douban.fm.svg?branch=master)](https://travis-ci.org/xwartz/douban.fm)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)

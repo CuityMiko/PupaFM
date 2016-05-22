@@ -26,7 +26,7 @@ const initialState = JSON.parse(localState) || {
   // 歌曲列表
   songs: [{
     singers: [{ id: '0', name: 'xwartz' }],
-    title: 'douban.fm',
+    title: 'PupaFM',
     album: '/subject/1458963/',
     url: 'https://xwartz.github.com',
     picture: 'https://img3.doubanio.com/lpic/s7052285.jpg',
