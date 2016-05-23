@@ -3,9 +3,9 @@
 
 [douban.fm](https://douban.fm) Music Desktop Player.
 
-[![Build Status](https://travis-ci.org/xwartz/douban.fm.svg?branch=master)](https://travis-ci.org/xwartz/douban.fm)
+[![Build Status](https://travis-ci.org/xwartz/PupaFM.svg?branch=master)](https://travis-ci.org/xwartz/PupaFM)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
-[![Dependency Status](https://david-dm.org/xwartz/douban.fm.svg?style=flat-square)](https://david-dm.org/xwartz/douban.fm)
+[![Dependency Status](https://david-dm.org/xwartz/PupaFM.svg?style=flat-square)](https://david-dm.org/xwartz/PupaFM)
 [![MIT Licensed](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://opensource.org/licenses/MIT)
 
 ## based on
@@ -24,7 +24,7 @@
 5. Lint: [ESLint](http://eslint.org/)
 
 ## Release Page
-[Releases](https://github.com/xwartz/douban.fm/releases)
+[Releases](https://github.com/xwartz/PupaFM/releases)
 
 ## Development
 
@@ -38,13 +38,13 @@ See [redux-devtools-dock-monitor](https://github.com/gaearon/redux-devtools-dock
 First, clone the repo via git:
 
 ```bash
-git clone git@github.com:xwartz/douban.fm.git
+git clone git@github.com:xwartz/PupaFM.git
 ```
 
 And then install dependencies.
 
 ```bash
-$ cd douban.fm && npm i
+$ cd PupaFM && npm i
 ```
 
 ### run
