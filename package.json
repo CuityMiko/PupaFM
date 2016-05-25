@@ -47,15 +47,13 @@
   },
   "keywords": [
     "douabn",
-    "fm",
     "douabn.fm",
-    "js",
-    "es6",
+    "doubanfm",
+    "pupafm",
     "babel",
     "webpack",
     "app",
     "react",
-    "reactjs",
     "redux",
     "electron",
     "desktop"
