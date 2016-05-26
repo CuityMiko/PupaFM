@@ -8,7 +8,7 @@ let template = [{
   submenu: [{
     label: 'Reload',
     accelerator: 'CmdOrCtrl+R',
-    click(item, focusedWindow) {
+    click (item, focusedWindow) {
       if (focusedWindow) {
         focusedWindow.reload()
       }
@@ -22,7 +22,7 @@ let template = [{
         return 'F11'
       }
     })(),
-    click(item, focusedWindow) {
+    click (item, focusedWindow) {
       if (focusedWindow) {
         focusedWindow.setFullScreen(!focusedWindow.isFullScreen())
       }
@@ -36,7 +36,7 @@ let template = [{
         return 'Ctrl+Shift+I'
       }
     })(),
-    click(item, focusedWindow) {
+    click (item, focusedWindow) {
       if (focusedWindow) {
         focusedWindow.toggleDevTools()
       }
@@ -58,11 +58,18 @@ let template = [{
   label: 'Help',
   role: 'help',
   submenu: [{
-    label: 'Learn More',
-    click() {
-      shell.openExternal('https://github.com/xwartz/PupaFM/issues')
+    label: 'Visit Homepage',
+    click () {
+      shell.openExternal(pkg.homepage)
     }
-  }, ]
+  }, {
+    type: 'separator'
+  }, {
+    label: 'Feedback',
+    click () {
+      shell.openExternal(pkg.bugs.url)
+    }
+  }]
 }, ]
 
 if (process.platform === 'darwin') {
@@ -96,7 +103,7 @@ if (process.platform === 'darwin') {
     }, {
       label: 'Login Out',
       accelerator: 'Command+Shift+Q',
-      click(menuItem, browserWindow) {
+      click (menuItem, browserWindow) {
         browserWindow.send('logout')
       }
     }, {
@@ -104,7 +111,7 @@ if (process.platform === 'darwin') {
     }, {
       label: 'Quit',
       accelerator: 'Command+Q',
-      click() {
+      click () {
         app.quit()
       }
     }, ]

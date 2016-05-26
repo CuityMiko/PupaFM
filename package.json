@@ -45,6 +45,9 @@
     "type": "git",
     "url": "git@github.com:xwartz/PupaFM.git"
   },
+  "bugs": {
+    "url": "https://github.com/xwartz/PupaFM/issues"
+  },
   "keywords": [
     "douabn",
     "douabn.fm",
