@@ -1,5 +1,6 @@
 'use strict'
 
+import { ipcRenderer } from 'electron'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { loginPop, logout } from '../../actions'
@@ -8,6 +9,12 @@ import { isEmpty } from '../../utils'
 import './index.scss'
 
 class User extends Component {
+
+  componentDidMount () {
+    ipcRenderer.on('logout', () => {
+      this.props.logout()
+    })
+  }
 
   renderInfo () {
     const { userInfo, loginPop, logout } = this.props

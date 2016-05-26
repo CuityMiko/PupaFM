@@ -1,6 +1,8 @@
 'use strict'
 
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, Menu } from 'electron'
+
+import menu from './settings/menu'
 
 let mainWindow = null
 
@@ -29,6 +31,8 @@ app.on('ready', () => {
 
   mainWindow.loadURL(`file://${__dirname}/index.html`)
 
+  Menu.setApplicationMenu(menu)
+
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools()
   }
@@ -39,5 +43,5 @@ app.on('ready', () => {
 })
 
 ipcMain.on('showWindow', (event, data) => {
-  mainWindow.show()
+  mainWindow.focus()
 })
