@@ -5,6 +5,7 @@
   "description": "douban.fm Music Desktop Player",
   "main": "./src/main.dev.js",
   "scripts": {
+    "install-hook": "ln -s ../../git-hooks/pre-commit .git/hooks/pre-commit",
     "lint": "eslint src test *.js",
     "hot-server": "node -r babel-register dev-server.js",
     "hot-start": "cross-env NODE_ENV=development electron -r babel-register ./src/main.dev",
