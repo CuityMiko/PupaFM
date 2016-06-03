@@ -82,6 +82,15 @@ $ npm run builder
 ## Note
 Before run `package` or `builder`, you should read [electron-builder docs](https://github.com/electron-userland/electron-builder#readme) and checkout [Code Signing](https://github.com/electron-userland/electron-builder#code-signing)
 
+## Contribution
+
+Follow the [code style](./.eslintrc.js)
+
+```bash
+$ npm install
+# install pre-commit lint hook
+$ npm run install-hook
+```
 
 ## License
 MIT © [xwartz](https://github.com/xwartz)
