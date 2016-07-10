@@ -31,4 +31,4 @@ dist
 release
 app/*
 !app/package.json
-.idea
+.idea/*
