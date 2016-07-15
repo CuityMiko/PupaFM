@@ -28,7 +28,7 @@ export const postNever = (channel, sid) => {
   return (dispatch) => {
     dispatch(never())
 
-    return operate('never_play_again', { channel, sid },
+    return operate('neverPlayAgain', { channel, sid },
       () => receiveNever())
   }
 }

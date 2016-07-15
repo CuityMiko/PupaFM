@@ -38,7 +38,7 @@ class Login extends Component {
   }
 
   handleCaptchaClick (e) {
-    operate('captcha_id', null, (id) => {
+    operate('captchaId', null, (id) => {
       this.setState({ captcha_id: id })
     })
   }
@@ -70,24 +70,24 @@ class Login extends Component {
           <p className="legend">登录</p>
           { this.renderError() }
           <div className="item spec">
-            <label for="email">邮箱 / 用户名</label>
-            <input type="text" id="email" name="email" className="text email" tabindex="1"
+            <label htmlFor="email">邮箱 / 用户名</label>
+            <input type="text" id="email" name="email" className="text email" tabIndex="1"
               value={ this.state.email }
               onChange={ this.handleEmailChange.bind(this) }
             />
           </div>
 
           <div className="item spec">
-            <label for="password">密码</label>
-            <input type="password" id="password" name="password" className="text" tabindex="2"
+            <label htmlFor="password">密码</label>
+            <input type="password" id="password" name="password" className="text" tabIndex="2"
               value={ this.state.password }
               onChange={ this.handlePasswordChange.bind(this) }
             />
           </div>
 
           <div className="item spec captcha">
-            <label for="captcha_solution">验证码</label>
-            <input type="text" name="captcha_solution" id="captcha_solution" className="text" tabindex="4"
+            <label htmlFor="captcha_solution">验证码</label>
+            <input type="text" name="captcha_solution" id="captcha_solution" className="text" tabIndex="4"
               value={ this.state.captcha_solution }
               onChange={ this.handleCaptchaChange.bind(this) }
             />
@@ -99,7 +99,7 @@ class Login extends Component {
 
           <div className="item recsubmit">
             <span className="loading"></span>
-            <input type="submit" id="submit" value="登 录" tabindex="5"/>
+            <input type="submit" id="submit" value="登 录" tabIndex="5"/>
           </div>
 
         </form>
