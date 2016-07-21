@@ -5,22 +5,30 @@
   "description": "douban.fm Music Desktop Player",
   "main": "./src/main.dev.js",
   "scripts": {
+    "pretest": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json",
+    "postinstall": "install-app-deps",
+
     "install-hook": "ln -s ../../git-hooks/pre-commit .git/hooks/pre-commit",
     "lint": "eslint src test *.js",
+
     "hot-server": "node -r babel-register dev-server.js",
     "hot-start": "cross-env NODE_ENV=development electron -r babel-register ./src/main.dev",
     "dev": "npm run hot-server && npm run hot-start",
+
+    "log": "pm2 logs",
+    "stop": "pm2 stop eco.json && pm2 delete eco.json",
+    "start": "npm run stop && pm2 start eco.json && npm run log",
+    "restart": "npm run stop && npm run start",
+
     "build-renderer": "cross-env NODE_ENV=production node -r babel-register ./node_modules/.bin/webpack --config webpack.config.pro.js --progress --profile --colors",
     "build-main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/.bin/webpack --config webpack.config.electron.js --progress --profile --colors",
-    "start": "cross-env NODE_ENV=production electron -r babel-register ./src/main.dev",
-    "pretest": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json",
-    "postinstall": "install-app-deps",
+
     "pack": "build --sign=stddup@gmail.com",
     "dist": "build --sign=stddup@gmail.com",
     "compile": "npm run build-renderer && npm run build-main",
     "package": "npm run compile && npm run pack",
     "builder": "npm run compile && npm run dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint"
   },
   "build": {
     "app-bundle-id": "org.develar.doubanfm",
@@ -89,6 +97,7 @@
     "img-loader": "^1.3.1",
     "json-loader": "^0.5.4",
     "node-sass": "^3.8.0",
+    "pm2": "^1.1.3",
     "react-hot-loader": "^1.3.0",
     "redux-devtools": "^3.2.0",
     "redux-devtools-dock-monitor": "^1.1.1",

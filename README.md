@@ -54,10 +54,12 @@ $ npm run hot-server
 $ npm run hot-start
 ```
 
-or just run dev
+or enable watch with pm2 [eco.json](./eco.json)
 
 ```bash
-$ npm run dev
+$ npm start
+$ npm stop
+$ npm restart
 ```
 
 ## Package
