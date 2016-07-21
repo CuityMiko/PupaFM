@@ -1,32 +1,23 @@
 'use strict'
 
-import express from 'express'
 import webpack from 'webpack'
-import webpackDevMiddleware from 'webpack-dev-middleware'
-import webpackHotMiddleware from 'webpack-hot-middleware'
+import WebpackDevServer from 'webpack-dev-server'
 
 import config from './webpack.config.dev'
 
-const app = express()
-const compiler = webpack(config)
-const PORT = 3000
-
-app.use(webpackDevMiddleware(compiler, {
+new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
+  hot: true,
+  historyApiFallback: true,
   noInfo: false,
   reload: true,
   stats: {
     colors: true
   }
-}))
-
-// hot
-app.use(webpackHotMiddleware(compiler))
-
-app.listen(PORT, 'localhost', (err) => {
+}).listen(3000, 'localhost', (err, result) => {
   if (err) {
-    console.error(err)
-    return
+    return console.log(err)
   }
-  console.log(`Listening at http://localhost:${PORT}`)
+
+  console.log('Listening at http://localhost:3000/')
 })

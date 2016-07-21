@@ -2,26 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script>
-    // (function() {
-    //   if (process.env.NODE_ENV !== 'development') {
-    //     const link = document.createElement('link');
-    //     link.rel = 'stylesheet';
-    //     link.href = './app/style.css';
-    //     document.write(link.outerHTML);
-    //   }
-    // }())
-  </script>
 </head>
 <body>
   <div id="app"></div>
 
-  <script>
-    (function() {
+<script>
+  (function () {
+    const scripts = ['bundle', 'vendor']
+    const prevDomain = (process.env.NODE_ENV === 'development') ? 'http://localhost:3000/app/' : './'
+    scripts.forEach(function (name) {
       const script = document.createElement('script')
-      script.src = (process.env.NODE_ENV === 'development') ? 'http://localhost:3000/app/bundle.js' : './bundle.js'
+      script.src = prevDomain + name + '.js'
       document.write(script.outerHTML)
-    }())
-  </script>
+    })
+  }())
+</script>
+
 </body>
 </html>
