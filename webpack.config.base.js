@@ -3,12 +3,30 @@
 import path from 'path'
 
 export default {
+
+  entry: {
+    bundle: ['./src/index'],
+    vendor: [
+      'react',
+      'react-dom',
+      'react-redux',
+      'redux',
+      'redux-thunk',
+      'doubanfm-sdk'
+    ]
+  },
+
+  output: {
+    path: path.join(__dirname, 'app'),
+    filename: '[name].js',
+    libraryTarget: 'commonjs2'
+  },
+
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      // include: [path.resolve(__dirname, 'src')],
       exclude: /node_modules/,
-      loaders: ['babel']
+      loaders: ['react-hot', 'babel']
     }, {
       test: /\.json$/,
       loader: 'json'
@@ -20,12 +38,6 @@ export default {
       loader: 'url?limit=10000!img?progressive=true'
     }],
     noParse: /node_modules\/json-schema\/lib\/validate\.js/
-  },
-
-  output: {
-    path: path.join(__dirname, 'app'),
-    filename: 'bundle.js',
-    libraryTarget: 'commonjs2'
   },
 
   resolve: {
