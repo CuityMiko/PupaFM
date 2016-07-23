@@ -79,9 +79,24 @@ $ npm run package
 
 ## Build installer App
 
+By default build for current platform and current arch.
+
 ```bash
 $ npm run builder
 ```
+
+Build app for Windows
+
+```bash
+$ npm run builder:win
+```
+
+Build app for Linux
+
+```bash
+$ npm run builder:linux
+```
+
 
 ## Note
 Before runing `package` or `builder`, you should read [electron-builder docs](https://github.com/electron-userland/electron-builder#readme) and checkout [Code Signing](https://github.com/electron-userland/electron-builder#code-signing)
