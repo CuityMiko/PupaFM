@@ -51,7 +51,7 @@ redux-devtools 主题 [redux-devtools-dock-monitor](https://github.com/gaearon/r
 git clone git@github.com:xwartz/PupaFM.git
 ```
 
-安装模块依赖
+安装模块依赖，推荐使用淘宝镜像 `cnpm`
 
 ```bash
 $ cd PupaFM && npm i
