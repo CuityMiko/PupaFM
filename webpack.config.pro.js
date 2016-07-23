@@ -7,7 +7,7 @@ import baseConfig from './webpack.config.base'
 const config = {
   ...baseConfig,
 
-  devtool: 'cheap-module-source-map',
+  devtool: 'eval',
 
   output: {
     ...baseConfig.output,
@@ -51,7 +51,8 @@ const config = {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/index.html'
+      template: 'src/index.html',
+      inject: false
     })
     // new ExtractTextPlugin('style.css', { allChunks: true })
   ],
