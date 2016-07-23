@@ -8,6 +8,8 @@
 [![Dependency Status](https://david-dm.org/xwartz/PupaFM.svg?style=flat-square)](https://david-dm.org/xwartz/PupaFM)
 [![MIT Licensed](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://opensource.org/licenses/MIT)
 
+[中文]('./README_ZH.md')
+
 ## based on
 
 ![based on](./erb-logo.png)
@@ -82,11 +84,11 @@ $ npm run builder
 ```
 
 ## Note
-Before run `package` or `builder`, you should read [electron-builder docs](https://github.com/electron-userland/electron-builder#readme) and checkout [Code Signing](https://github.com/electron-userland/electron-builder#code-signing)
+Before runing `package` or `builder`, you should read [electron-builder docs](https://github.com/electron-userland/electron-builder#readme) and checkout [Code Signing](https://github.com/electron-userland/electron-builder#code-signing)
 
 ## Contribution
 
-Follow the [code style](./.eslintrc.js)
+Follow this [code style](./.eslintrc.js)
 
 ```bash
 $ npm install
