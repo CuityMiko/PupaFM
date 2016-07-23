@@ -48,6 +48,10 @@
           "type": "file"
         }
       ]
+    },
+    "win": {
+      "iconUrl": "https://github.com/xwartz/PupaFM/blob/master/build/icon.ico",
+      "remoteReleases": true
     }
   },
   "repository": {
