@@ -51,7 +51,12 @@ App.PropTypes = {
   channelId: PropTypes.number.isRequired
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = state => {
+  return {
+    ...state.song,
+    channelId: state.channelId
+  }
+}
 
 const mapDispatchToProps = { fetchSongs }
 

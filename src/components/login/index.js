@@ -110,7 +110,9 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state
+  return {
+    ...state.login
+  }
 }
 
 const mapDispatchToProps = { login, loginPop }
