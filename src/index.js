@@ -8,32 +8,35 @@ import Root from './containers/Root'
 const localState = localStorage.getItem('state')
 
 const initialState = JSON.parse(localState) || {
-  // login
+  login: {
+    isPop: false,
+    errMsg: ''
+  },
   userInfo: {},
-  isPop: false,
-  errMsg: '',
   channelId: '0',
-  // 是否显示歌词
-  isShowLyric: false,
-  // 暂停/播放
-  pause: false,
-  // 当前歌曲索引
-  current: 0,
-  // 正在获取歌曲
-  isFetchingSong: false,
-  // 正在获取歌词
-  isFetchingLyric: false,
-  // 歌曲列表
-  songs: [{
-    singers: [{ id: '0', name: 'xwartz' }],
-    title: 'PupaFM',
-    album: '/subject/1458963/',
-    url: 'https://xwartz.github.com',
-    picture: 'https://img3.doubanio.com/lpic/s7052285.jpg',
-    like: false,
-    lyric: [],
-    sid: ''
-  }]
+  song: {
+    // 是否显示歌词
+    isShowLyric: false,
+    // 暂停/播放
+    pause: false,
+    // 当前歌曲索引
+    current: 0,
+    // 正在获取歌曲
+    isFetchingSong: false,
+    // 正在获取歌词
+    isFetchingLyric: false,
+    // 歌曲列表
+    songs: [{
+      singers: [{ id: '0', name: 'xwartz' }],
+      title: 'PupaFM',
+      album: '/subject/1458963/',
+      url: 'https://xwartz.github.com',
+      picture: 'https://img3.doubanio.com/lpic/s7052285.jpg',
+      like: false,
+      lyric: [],
+      sid: ''
+    }]
+  }
 }
 
 const store = configureStore(initialState)

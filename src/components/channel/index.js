@@ -38,7 +38,11 @@ Channels.propTypes = {
   changeChannel: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = state => {
+  return {
+    channelId: state.channelId
+  }
+}
 
 const mapDispatchToProps = { changeChannel }
 

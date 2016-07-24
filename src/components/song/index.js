@@ -197,7 +197,13 @@ Song.propTypes = {
   isFetchingLyric: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = state => {
+  return {
+    ...state.song,
+    channelId: state.channelId
+  }
+}
+
 const mapDispatchToProps = {
   nextSong,
   pauseSong,
