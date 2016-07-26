@@ -11,7 +11,7 @@
 
 [English](./README.md)
 
-## based on
+## 用到的一些技术
 
 ![based on](./erb-logo.png)
 
@@ -87,9 +87,25 @@ $ npm run package
 
 ## 打包成可安装的版本
 
+默认打包当前开发环境的版本
+
 ```bash
 $ npm run builder
 ```
+
+Windows x64版本
+
+```bash
+$ npm run builder:win
+```
+
+Linux 版本
+
+```bash
+$ npm run builder:linux
+```
+
+具体其他平台的打包可以查看文档[electron-builder](https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build)
 
 ## 注意
 
@@ -97,7 +113,7 @@ $ npm run builder
 
 还有了解下 [Code Signing](https://github.com/electron-userland/electron-builder#code-signing)
 
-## 参与开发
+## 跪求贡献代码
 
 请遵循这个编码风格 [code style](./.eslintrc.js)
 

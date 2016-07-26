@@ -8,7 +8,7 @@
 [![Dependency Status](https://david-dm.org/xwartz/PupaFM.svg?style=flat-square)](https://david-dm.org/xwartz/PupaFM)
 [![MIT Licensed](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://opensource.org/licenses/MIT)
 
-[中文说明](./README_ZH.md)
+### [中文说明](./README_ZH.md)
 
 ## based on
 
