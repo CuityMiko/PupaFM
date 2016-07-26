@@ -67,10 +67,10 @@ class Login extends Component {
       <div className="pop">
         <a href="javascript:;" className="close" onClick={ loginPop }>x</a>
         <form className="login-form" onSubmit={ this.handleSubmit.bind(this) } >
-          <p className="legend">登录</p>
+          <p className="legend">Sign In</p>
           { this.renderError() }
           <div className="item spec">
-            <label htmlFor="email">邮箱 / 用户名</label>
+            <label htmlFor="email">Email</label>
             <input type="text" id="email" name="email" className="text email" tabIndex="1"
               value={ this.state.email }
               onChange={ this.handleEmailChange.bind(this) }
@@ -78,7 +78,7 @@ class Login extends Component {
           </div>
 
           <div className="item spec">
-            <label htmlFor="password">密码</label>
+            <label htmlFor="password">Password</label>
             <input type="password" id="password" name="password" className="text" tabIndex="2"
               value={ this.state.password }
               onChange={ this.handlePasswordChange.bind(this) }
@@ -86,20 +86,20 @@ class Login extends Component {
           </div>
 
           <div className="item spec captcha">
-            <label htmlFor="captcha_solution">验证码</label>
+            <label htmlFor="captcha_solution">Captcha</label>
             <input type="text" name="captcha_solution" id="captcha_solution" className="text" tabIndex="4"
               value={ this.state.captcha_solution }
               onChange={ this.handleCaptchaChange.bind(this) }
             />
           </div>
-          <img alt="captcha" width="130" height="35" title="看不清楚?点图片可以换一个"
+          <img alt="captcha" width="130" height="35" title="refresh"
             src={ 'http://douban.fm/misc/captcha?size=m&id=' + this.state.captcha_id }
             onClick={ this.handleCaptchaClick.bind(this) }
           />
 
           <div className="item recsubmit">
             <span className="loading"></span>
-            <input type="submit" id="submit" value="登 录" tabIndex="5"/>
+            <input type="submit" id="submit" value="Sign In" tabIndex="5"/>
           </div>
 
         </form>
