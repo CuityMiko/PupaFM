@@ -63,11 +63,11 @@ class Song extends Component {
   }
 
   pauseSong () {
-    this.refs.player.pause()
+    this.player.pause()
   }
 
   playSong () {
-    this.refs.player.play()
+    this.player.play()
   }
 
   handlePause () {
@@ -131,9 +131,9 @@ class Song extends Component {
 
   listenUpdate () {
     // 监听时间更新
-    this.refs.player.addEventListener('timeupdate', () => {
-      let pt = this.refs.player.currentTime
-      let dt = this.refs.player.duration
+    this.player.addEventListener('timeupdate', () => {
+      let pt = this.player.currentTime
+      let dt = this.player.duration
 
       this.updateState({
         percent: pt / dt * 100 + '%',
@@ -142,7 +142,7 @@ class Song extends Component {
     })
 
     // 监听播放结束
-    this.refs.player.addEventListener('ended', () => {
+    this.player.addEventListener('ended', () => {
       this.handleNext()
     })
   }
@@ -155,7 +155,7 @@ class Song extends Component {
       <div className="fullplayer">
         <div className="playing-info">
 
-          <audio ref='player' src={ song.url } preload autoPlay={ !pause } />
+          <audio ref={ r => { this.player = r } } src={ song.url } preload autoPlay={ !pause } />
 
           <SongTitle { ...song } time={ this.state.time } pause={ pause }
             onPause={ this.handlePause.bind(this) }

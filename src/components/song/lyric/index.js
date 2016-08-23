@@ -33,7 +33,7 @@ class Lyric extends Component {
 
     const index = this.getCurrent()
     const top = 28 * (index - 4 < 0 ? 0 : index - 4)
-    this.refs.lyric.scrollTop = top
+    this.lyric.scrollTop = top
   }
 
   renderLyric () {
@@ -60,7 +60,7 @@ class Lyric extends Component {
 
     return (
       <div className={ isShowLyric ? 'playing-lyric' : 'hide' }>
-        <div className="lyric" ref="lyric">
+        <div className="lyric" ref={ r => { this.lyric = r } }>
           { this.renderLyric() }
         </div>
         {
