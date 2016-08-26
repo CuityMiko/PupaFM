@@ -8,7 +8,7 @@
 
 <script>
   (function () {
-    const scripts = ['bundle', 'vendor']
+    const scripts = ['vendor', 'app']
     const prevDomain = (process.env.NODE_ENV === 'development') ? 'http://localhost:3000/app/' : './'
     scripts.forEach(function (name) {
       const script = document.createElement('script')

@@ -1,11 +1,12 @@
 'use strict'
 
 import path from 'path'
+import webpack from 'webpack'
 
 export default {
 
   entry: {
-    bundle: ['./src/index'],
+    app: ['./src/index'],
     vendor: [
       'react',
       'react-dom',
@@ -47,7 +48,7 @@ export default {
   },
 
   plugins: [
-
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
   ],
 
   externals: [

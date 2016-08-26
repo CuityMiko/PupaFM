@@ -7,8 +7,6 @@ import baseConfig from './webpack.config.base'
 const config = {
   ...baseConfig,
 
-  devtool: 'eval',
-
   output: {
     ...baseConfig.output,
 
@@ -38,6 +36,7 @@ const config = {
   plugins: [
     ...baseConfig.plugins,
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       __DEV__: false,
       'process.env': {
