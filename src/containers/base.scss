@@ -5,6 +5,11 @@ ul, ol {
   list-style: none;
 }
 
+body {
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+}
+
 * {
 	font-family: -apple-system,SF UI Display,Helvetica Neue,Helvetica,Lucida Grande,PingFang SC,Source Han Sans CN,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
   text-rendering: optimizeLegibility;
