@@ -1,7 +1,7 @@
 {
   "name": "PupaFM",
   "productName": "PupaFM",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "douban.fm Music Desktop Player",
   "main": "./src/main.dev.js",
   "scripts": {
